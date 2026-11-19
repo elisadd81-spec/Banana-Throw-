@@ -1,0 +1,1844 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Banana Throw - Sitio Oficial: Arena, Guía, Noticias, Privacidad y Contacto</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#bfe9ff;
+  --ink:#2b1b0e;
+  --panel:#fff8d9;
+  --card:#fffdf2;
+  --ov:rgba(255,244,194,.97);
+  --accent:#ff8a3d;
+  --gold:#ffd93b;
+  --green:#8fd13f;
+  --muted:#6d5239;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#10222e;--ink:#fff1c0;--panel:#3a2d13;--card:#2b210d;--ov:rgba(28,20,6,.97);--muted:#d9c28f;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10222e;--ink:#fff1c0;--panel:#3a2d13;--card:#2b210d;--ov:rgba(28,20,6,.97);--muted:#d9c28f;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{
+  background:radial-gradient(circle at top,#d8f3ff,var(--bg));
+  display:flex;justify-content:center;align-items:center;
+  overflow:hidden;user-select:none;-webkit-user-select:none;
+  font-family:"Nunito",sans-serif;
+}
+#g{
+  position:relative;height:100%;max-height:175vw;aspect-ratio:3/5;
+  box-shadow:0 12px 35px rgba(0,0,0,.35);
+  border-radius:18px;overflow:hidden;border:4px solid var(--ink);
+}
+@media(max-width:520px){
+  #g{width:100%;height:100%;max-height:none;aspect-ratio:auto;border:none;border-radius:0}
+}
+canvas{width:100%;height:100%;display:block;touch-action:none}
+#u{
+  position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;
+  padding:12px 14px 24px;
+  color:var(--ink);background:var(--ov);text-align:center;
+  scrollbar-width:thin;
+}
+button{
+  font-family:"Nunito",sans-serif;font-weight:900;cursor:pointer;
+  border:2.5px solid var(--ink);border-radius:12px;
+  background:var(--card);color:var(--ink);
+  padding:6px 10px;box-shadow:0 2px 0 var(--ink);
+  transition:transform .08s ease,background .15s ease;
+}
+button:hover:not(:disabled){transform:translateY(-1px)}
+button:active:not(:disabled){transform:translateY(1px)}
+button:disabled{opacity:.45;cursor:not-allowed}
+button.on{background:var(--green);color:#1f2c0b}
+button.go{
+  width:100%;font-family:"Bangers",cursive;font-size:1.45em;letter-spacing:.04em;
+  background:var(--green);color:#1f2c0b;padding:10px 14px;
+  border-radius:16px;border:3px solid var(--ink);box-shadow:0 4px 0 var(--ink);
+}
+.tb{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:8px 0}
+.titleFont{font-family:"Bangers",cursive;letter-spacing:.04em}
+h1,h2,h3{
+  font-family:"Bangers",cursive;letter-spacing:.04em;
+  margin:.15em 0;color:#ffb800;
+  -webkit-text-stroke:.045em var(--ink);paint-order:stroke fill;
+}
+h1{font-size:2.4em;line-height:1}
+h2{font-size:1.75em;line-height:1.1}
+h3{font-size:1.35em;color:#ff8a3d}
+p{margin:.35em 0;font-size:.92em;line-height:1.35}
+
+/* Navegación superior persistente dentro del menú */
+.topNav{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:4px;
+  position:sticky;top:0;z-index:20;
+  background:var(--panel);padding:6px;border-radius:14px;
+  border:3px solid var(--ink);margin-bottom:10px;
+  box-shadow:0 3px 0 var(--ink);
+}
+.topNav button{
+  font-family:"Bangers",cursive;font-size:.84em;letter-spacing:.03em;
+  padding:5px 2px;border-radius:10px;border:2px solid var(--ink);
+  background:var(--card);color:var(--ink);box-shadow:none;
+  display:flex;flex-direction:column;align-items:center;gap:1px;
+}
+.topNav button.active{
+  background:var(--gold);color:#2b1b0e;transform:translateY(-1px);
+  box-shadow:0 2px 0 #2b1b0e;
+}
+.siteFooter{
+  margin-top:14px;padding:10px;border-radius:14px;
+  border:2.5px solid var(--ink);background:var(--panel);
+  font-size:.78em;text-align:center;line-height:1.4;
+}
+.siteFooter a,.inlineLink{
+  color:#d95314;font-weight:900;text-decoration:underline;cursor:pointer;background:none;border:none;padding:0;box-shadow:none;font-family:"Nunito",sans-serif;font-size:1em;
+}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .siteFooter a,
+  :root:not([data-theme="light"]) .inlineLink{color:#ffae42;}
+}
+:root[data-theme="dark"] .siteFooter a,
+:root[data-theme="dark"] .inlineLink{color:#ffae42;}
+.legalBox{
+  background:var(--panel);border:2px solid var(--ink);border-radius:12px;
+  padding:8px 10px;margin:6px 0;font-size:.82em;line-height:1.4;
+}
+.formField{width:100%;margin:4px 0 8px;padding:7px 9px;border-radius:10px;border:2px solid var(--ink);background:var(--panel);color:var(--ink);font-family:"Nunito",sans-serif;font-size:.86em;font-weight:700}
+.card{
+  background:var(--card);border:3px solid var(--ink);border-radius:16px;
+  padding:10px 12px;margin:8px 0;text-align:left;
+  box-shadow:0 3px 0 var(--ink);
+}
+.it{
+  display:flex;justify-content:space-between;align-items:center;gap:.55em;
+  text-align:left;border:3px solid var(--ink);border-radius:14px;
+  padding:.4em .6em;margin:.45em 0;background:var(--panel);
+}
+.it small{display:block;font-size:.78em;color:var(--muted);line-height:1.25;font-weight:700}
+.sw{display:inline-block;width:1.25em;height:1.25em;border:3px solid var(--ink);border-radius:50%;vertical-align:middle;margin-right:.35em}
+.it.barItem{background:linear-gradient(135deg,#fff0ad,#ffc45e);border-color:#713b19;box-shadow:0 3px 0 #8b4b20}
+.it.barItem button{background:#ff963d;color:#2b1b0e;border-color:#713b19;white-space:nowrap}
+
+.avTabs{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin:.4em 0}
+.avTabs button{font-size:.82em;padding:.24em .48em}
+.avItem{background:linear-gradient(135deg,#fffdf0,#fff0bb)}
+.rarity{font-weight:900}
+
+.heroBanner{
+  background:linear-gradient(135deg,#ffd93b 0%,#ff9a3c 100%);
+  border:3px solid #2b1b0e;border-radius:18px;padding:12px;
+  color:#2b1b0e;margin-bottom:8px;box-shadow:0 4px 0 #2b1b0e;
+}
+.heroBanner h1{font-size:2.3em;margin:0;color:#fff;-webkit-text-stroke:.05em #2b1b0e}
+.badge{
+  display:inline-block;background:#2b1b0e;color:#ffd93b;
+  font-family:"Bangers",cursive;font-size:.82em;padding:2px 9px;
+  border-radius:999px;letter-spacing:.05em;margin-bottom:4px;
+}
+.statGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:8px 0}
+.statBox{
+  background:var(--panel);border:2.5px solid var(--ink);border-radius:12px;
+  padding:6px 4px;text-align:center;
+}
+.statBox strong{display:block;font-family:"Bangers",cursive;font-size:1.3em;color:#ff7b29}
+.statBox span{font-size:.72em;font-weight:800;text-transform:uppercase}
+
+.guideCard{
+  display:flex;gap:10px;align-items:flex-start;
+  background:var(--card);border:3px solid var(--ink);border-radius:15px;
+  padding:9px;margin:7px 0;text-align:left;
+}
+.guideArt{
+  flex:0 0 64px;height:64px;border-radius:12px;border:2.5px solid var(--ink);
+  display:flex;align-items:center;justify-content:center;background:#fff4c2;
+}
+.tagRow{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.tag{
+  font-size:.72em;font-weight:800;padding:2px 7px;border-radius:8px;
+  border:1.5px solid var(--ink);background:var(--panel);
+}
+.newsCard{
+  background:var(--card);border:3px solid var(--ink);border-radius:16px;
+  padding:10px 12px;margin:8px 0;text-align:left;position:relative;
+}
+.newsDate{
+  font-size:.74em;font-weight:900;color:#ff6e26;text-transform:uppercase;
+}
+.illusBox{
+  width:100%;border-radius:12px;border:2.5px solid var(--ink);
+  overflow:hidden;margin:6px 0;background:#e4f7ff;
+}
+.cred{margin:1em 0 .3em;padding:.65em;border:3px dashed var(--ink);border-radius:14px;background:var(--panel);font-size:.82em}
+.toastMsg{
+  position:fixed;bottom:18px;left:50%;transform:translateX(-50%);
+  background:#2b1b0e;color:#ffd93b;padding:8px 16px;border-radius:999px;
+  font-family:"Bangers",cursive;font-size:1.05em;z-index:99;
+  border:2px solid #ffd93b;box-shadow:0 4px 12px rgba(0,0,0,.4);
+}
+</style>
+</head>
+<body>
+<div id="g">
+  <canvas id="c" width="480" height="800"></canvas>
+  <div id="u"></div>
+  <input id="saveFile" type="file" accept="application/json,.json" hidden>
+</div>
+
+<script>
+/* ============================================================================
+   BANANA THROW - EDICIÓN COMPLETA CON PÁGINAS DE GUÍA, NOTICIAS E ILUSTRACIONES
+   Todo el código, textos e ilustraciones vectoriales son 100% originales.
+   ============================================================================ */
+
+const W=480, H=800;
+const cv=document.getElementById('c');
+const x=cv.getContext('2d');
+const U=document.getElementById('u');
+
+/* --- VARIABLES GLOBALES DE ESTADO Y TIEMPO --- */
+let wave=0;
+let currentWorld='park';
+let left=0;
+let sp=0;
+let boss=0;
+let bh=0;
+let lives=5;
+let gs=[];
+let bm=[];
+let fx=[];
+let powerFX=[];
+let tm=0;
+let DT=0;
+let shk=0;
+let throwAnimT=0;
+let throwDirX=0;
+let throwDirY=-1;
+
+/* --- FUNCIÓN AUXILIAR DE ELIPSE EN CANVAS --- */
+const E=(cx,cy,rx,ry,col)=>{
+  x.fillStyle=col;
+  x.strokeStyle='#2b1b0e';
+  x.lineWidth=2.5;
+  x.beginPath();
+  x.ellipse(cx,cy,rx,ry,0,0,Math.PI*2);
+  x.fill();
+  x.stroke();
+};
+
+/* --- CATÁLOGO DE ENEMIGOS ORIGINALES --- */
+const GT={
+  n:{m:'Gorila Explorador',h:2,v:.085,r:34,c:'#8a5a3b',o:1,d:'Avanza decidido hacia la barricada en busca de bananas frescas.'},
+  r:{m:'Simio Corredor',h:1,v:.17,r:28,c:'#e8703a',o:2,d:'Ligero y veloz; corre al doble de ritmo que un gorila común.'},
+  t:{m:'Gorila Coloso',h:9,v:.05,r:46,c:'#4b3a5a',o:6,d:'Gran resistencia física pero desplazamiento pesado.'},
+  e:{m:'Guardián de Corteza',h:3,v:.075,r:36,c:'#5c8a6b',o:4,d:'Porta un escudo natural que absorbe los primeros 3 impactos.'},
+  s:{m:'Simio Acróbata',h:2,v:.07,r:32,c:'#9b59d0',o:4,d:'Realiza impulsos aéreos periódicos para acortar distancia.'},
+  k:{m:'Gran Jefe del Parque',h:40,v:.03,r:60,c:'#2a2a33',o:40,d:'Líder de la arboleda. Aparece cada 5 oleadas y convoca aliados.'},
+  w:{m:'Espectro de Niebla',h:5,v:.105,r:34,c:'#b9efff',o:7,d:'Flota suavemente sobre el terreno a gran velocidad.'},
+  f:{m:'Gorila Ígneo',h:9,v:.072,r:42,c:'#e65b24',o:10,d:'Forjado cerca de los cráteres; soporta fuertes golpes.'},
+  c:{m:'Cíclope de Roca',h:14,v:.047,r:50,c:'#527b9e',o:14,d:'Enorme visión única y coraza pétrea muy difícil de derribar.'},
+  m:{m:'Chamán Banánico',h:7,v:.068,r:39,c:'#7650a8',o:12,d:'Canaliza energía tropical para invocar refuerzos en marcha.'},
+  i:{m:'Sombra Ágil',h:4,v:.155,r:30,c:'#343c55',o:9,d:'Ejecuta desplazamientos relámpago hacia tu posición.'},
+  q:{m:'Gólem de Cuarzo',h:16,v:.038,r:48,c:'#69c9d8',o:16,d:'Su coraza cristalina desvía los primeros golpes directos.'},
+  b:{m:'Furia Salvaje',h:22,v:.062,r:54,c:'#9b382f',o:22,d:'Cuando pierde la mitad de su energía, entra en frenesí y acelera.'},
+  v:{m:'Gorila Magma',h:13,v:.055,r:43,c:'#d94a21',o:15,d:'Recubierto de basalto fundido con alta resistencia.'},
+  j:{m:'Mono Chispa',h:5,v:.145,r:30,c:'#f0782a',o:11,d:'Acelera súbitamente al acercarse a tu línea de defensa.'},
+  a:{m:'Titán del Cráter',h:38,v:.032,r:62,c:'#8d3427',o:55,d:'Comandante volcánico de peso colosal y cuernos incandescentes.'},
+  h:{m:'Gorila Glaciar',h:12,v:.052,r:43,c:'#95dff2',o:15,d:'Protegido por escarcha compacta; marcha con paso firme.'},
+  y:{m:'Yeti Saltarín',h:8,v:.075,r:48,c:'#e7f7ff',o:13,d:'Da grandes zancadas sobre la nieve para sorprenderte.'},
+  z:{m:'Monarca de Escarcha',h:42,v:.029,r:63,c:'#5ba7d0',o:58,d:'Jefe invernal equipado con un escudo de hielo reforzado.'},
+  u:{m:'Visitante Orbital',h:9,v:.082,r:39,c:'#7cc96e',o:16,d:'Utiliza saltos cuánticos cortos para avanzar de golpe.'},
+  o:{m:'Espectro Estelar',h:10,v:.075,r:41,c:'#9475de',o:18,d:'Su cuerpo fasado puede esquivar proyectiles ocasionalmente.'},
+  x:{m:'Coloso Meteórico',h:46,v:.027,r:66,c:'#776b9f',o:65,d:'Guardián espacial formado por roca cósmica densa.'},
+  d:{m:'Soberano Dorado',h:55,v:.034,r:62,c:'#d9a516',o:75,d:'Jefe supremo del Parque en la oleada 10; escudo áureo e invocación.',au:'rgba(255,205,60,.35)',sh:2,sm:'r',si:4.5},
+  l:{m:'Emperador de Lava',h:60,v:.033,r:64,c:'#e04a1a',o:95,d:'Soberano ígneo: convoca monos chispa y se enfurece al ser herido.',au:'rgba(255,90,20,.4)',sm:'j',si:4,en:1},
+  g:{m:'Emperador Glacial',h:66,v:.03,r:64,c:'#8fdcff',o:100,d:'Soberano helado: escudo de 4 capas e invocación invernal.',au:'rgba(150,225,255,.45)',sh:4,sm:'h',si:5.5},
+  p:{m:'Emperador Cósmico',h:72,v:.031,r:65,c:'#8a6be0',o:110,d:'Soberano estelar: teletransporte táctico y tropas orbitales.',au:'rgba(170,130,255,.4)',tp:1,sm:'u',si:5},
+  G:{m:'Centinela de Roble',h:10,v:.045,r:44,c:'#8a6b3a',o:16,d:'Escudo de madera gruesa que bloquea hasta 4 impactos.',sh:4},
+  D:{m:'Simio Tesoro',h:8,v:.1,r:36,c:'#e8b820',o:55,d:'¡Ejemplar especial! Muy rápido y otorga una gran reserva de bananas.',au:'rgba(255,215,70,.4)',ds:3.5},
+  R:{m:'Cíclope de Obsidiana',h:20,v:.04,r:50,c:'#2e2438',o:30,d:'Coraza volcánica oscura que absorbe 3 impactos directos.',sh:3},
+  S:{m:'Salamandra Simio',h:12,v:.068,r:38,c:'#ff7a2e',o:26,d:'Regenera su vitalidad gracias al calor ambiental.',rg:1.4},
+  I:{m:'Simio Deslizador',h:8,v:.12,r:32,c:'#c9efff',o:22,d:'Aprovecha el hielo para impulsarse en tramos velozmente.',ds:3.8},
+  W:{m:'Gorila Ventisca',h:16,v:.054,r:45,c:'#b8e6f5',o:32,d:'Convoca gorilas glaciares mientras avanza.',sm:'h',si:6.5},
+  Q:{m:'Autómata Simio',h:24,v:.05,r:46,c:'#8d96b8',o:38,d:'Chasis blindado capaz de resistir 5 impactos antes de recibir daño.',sh:5},
+  Z:{m:'Gorila Singularidad',h:15,v:.07,r:41,c:'#5a3fb0',o:40,d:'Pliega el espacio para reaparecer más cerca de tu defensa.',tp:1}
+};
+for(const k of ['k','a','z','x','l','g','p','d'])GT[k].bs=1;
+
+/* --- ARSENAL ORIGINAL DE BANANAS --- */
+const WP=[
+  {n:'Banana Clásica',d:1,s:1,z:1,m:1,x:0,p:0,fx:'normal',cat:'Básica',t:'Trayectoria boomerang equilibrada; ideal para dominar la curva.'},
+  {n:'Plátano Robusto',d:3,s:.7,z:1.4,m:1,x:0,p:150,fx:'normal',cat:'Impacto',t:'Mayor peso y potencia de choque con vuelo pausado.'},
+  {n:'Trío Acrobático',d:1,s:1.3,z:.8,m:3,x:0,p:300,fx:'normal',cat:'Dispersión',t:'Lanza 3 bananas ligeras en abanico para cubrir más terreno.'},
+  {n:'Banana Detonante',d:1,s:.9,z:1,m:1,x:1,p:500,fx:'bomb',cat:'Área',t:'Estalla al alcanzar el vértice de su parábola dañando a grupos.'},
+  {n:'Banana Cardo',d:2,s:1,z:1.05,m:1,x:0,p:650,fx:'thorn',cat:'Estado',t:'Sus púas naturales provocan daño continuo por sangrado.'},
+  {n:'Banana Brasa',d:1,s:1.05,z:1,m:1,x:0,p:800,fx:'fire',cat:'Elemental',t:'Enciende al objetivo y lo quema durante varios segundos.'},
+  {n:'Piñata Festiva',d:1,s:.9,z:1.1,m:1,x:0,p:1000,fx:'pinata',cat:'Área',t:'Se fragmenta en mini bananas que golpean a los enemigos cercanos.'},
+  {n:'Banana Escarcha',d:1,s:1,z:1.1,m:1,x:0,p:1200,fx:'ice',cat:'Control',t:'Congela temporalmente y reduce drásticamente la velocidad rival.'},
+  {n:'Banana Voltio',d:2,s:1.15,z:.95,m:1,x:0,p:1400,fx:'electric',cat:'Cadena',t:'Libera arcos eléctricos que saltan hasta a 3 gorilas próximos.'},
+  {n:'Banana Espora',d:1,s:1,z:1,m:1,x:0,p:1600,fx:'poison',cat:'Estado',t:'Libera esporas tropicales que debilitan gradualmente al objetivo.'},
+  {n:'Banana Propulsora',d:3,s:1.6,z:.9,m:1,x:0,p:1800,fx:'rocket',cat:'Velocidad',t:'Impulso supersónico para interceptar corredores antes de que lleguen.'},
+  {n:'Abanico Quíntuple',d:1,s:1,z:.85,m:5,x:0,p:2050,fx:'chaos',cat:'Dispersión',t:'Despliega 5 bananas simultáneas en formación abierta.'},
+  {n:'Banana Meteoro',d:4,s:.65,z:1.55,m:1,x:0,p:2300,fx:'meteor',cat:'Impacto',t:'Proyectil denso con onda expansiva al impactar.'},
+  {n:'Banana Prisma',d:2,s:1.25,z:1.05,m:3,x:0,p:2600,fx:'rainbow',cat:'Dispersión',t:'Tres haces luminosos rápidos con daño aumentado.'},
+  {n:'Banana Colosal',d:5,s:.55,z:2,m:1,x:0,p:3000,fx:'giant',cat:'Impacto',t:'Tamaño gigantesco que barre con todo lo que toca.'},
+  {n:'Banana Cuarzo',d:4,s:1.1,z:1.1,m:1,x:0,p:4500,fx:'ice',c:'#9fe8ff',cat:'Control',t:'Cristaliza al rival con alta potencia de impacto.'},
+  {n:'Banana Tempestad',d:3,s:1.3,z:1,m:3,x:0,p:7000,fx:'storm',c:'#ffe94d',cat:'Cadena',t:'Tres proyectiles que desatan cadenas de hasta 6 rayos.'},
+  {n:'Banana Llamarada',d:3,s:1.25,z:1.15,m:5,x:0,p:10000,fx:'fire',c:'#ff6a1f',f:.2,cat:'Elemental',t:'Cinco bananas incandescentes en abanico cerrado.'},
+  {n:'Banana Vórtice',d:6,s:.8,z:1.5,m:1,x:0,p:15000,fx:'void',c:'#8a3cff',cat:'Control',t:'Genera un pozo gravitatorio que empuja a los gorilas hacia atrás.'},
+  {n:'Banana Reactor',d:7,s:.7,z:1.6,m:1,x:1,r:180,xd:3,p:24000,fx:'nuke',c:'#7dff3a',cat:'Área',t:'Explosión de amplio radio que además aplica toxinas.'},
+  {n:'Banana Dracónica',d:8,s:1.4,z:1.3,m:3,x:0,p:36000,fx:'fire',c:'#ff3d2e',cat:'Elemental',t:'Tres ráfagas ígneas de altísima potencia.'},
+  {n:'Banana Relámpago',d:9,s:2,z:1.1,m:1,x:0,p:52000,fx:'storm',c:'#fff7a0',cat:'Cadena',t:'Velocidad extrema combinada con descargas en cadena.'},
+  {n:'Banana Nebulosa',d:7,s:1.3,z:1.2,m:7,f:.22,x:0,p:75000,fx:'void',c:'#c59bff',cat:'Control',t:'Siete proyectiles cósmicos que hacen retroceder las filas.'},
+  {n:'Banana Supernova',d:14,s:.9,z:1.9,m:1,x:1,r:230,xd:6,p:110000,fx:'nuke',c:'#ff4bca',cat:'Área',t:'Detonación masiva capaz de limpiar oleadas enteras.'},
+  {n:'Banana Horizonte',d:12,s:1.6,z:1.5,m:9,f:.2,x:0,p:160000,fx:'storm',c:'#5ff2ff',cat:'Cadena',t:'Nueve proyectiles eléctricos de cobertura total.'},
+  {n:'Banana Soberana Áurea',d:25,s:1.5,z:2.3,m:1,x:0,p:300000,fx:'giant',c:'#ffd700',cat:'Definitiva',t:'La reliquia máxima del valle: tamaño monumental y fuerza imparable.'}
+];
+
+const SK=[
+  ['Amarilla','#ffd93b','#8b5a1a',0,'La cosecha clásica del valle.'],['Verde Selva','#8fd13f','#2f6b1a',60,'Fresca y vibrante.'],['Dorada','#ffc400','#fff6a0',150,'Destellos solares.'],['Cacao','#7b4a2a','#3a1f0e',200,'Tono tostado artesanal.'],['Coral','#ff7eb6','#c2185b',250,'Brillo tropical dulce.'],['Glacial','#9be7ff','#2b8fd1',300,'Escarcha cristalina.'],['Arcoíris','R','#fff',500,'Espectro multicolor dinámico.'],
+  ['Bio-Neón','#8dff35','#e8ff9a',650,'Resplandor fluorescente.'],['Nebulosa','#5634a8','#d9b6ff',750,'Polvo estelar profundo.'],['Zafiro','#55dfff','#f1ffff',850,'Reflejos de gema pulida.'],['Magma','#ff4d20','#ffd04d',950,'Núcleo incandescente.'],['Camuflaje','#657b43','#d9c18b',1050,'Patrón táctico de jungla.'],['Solsticio','#ffae18','#fff5a2',1200,'Corona radiante.'],['Bruma','#dceeff','#ffffff',1350,'Aura etérea translúcida.'],['Confeti','#ff8ed1','#fff1f8',1500,'Alegría festiva.'],['Fallo Digital','#24f4e8','#ff4bca',1700,'Doble contorno cibernético.'],['Púrpura Real','#7938b8','#ffe17a',1900,'Acabado ceremonial.'],['Bosque Antiguo','#3b965d','#c8ffb7',2100,'Energía natural.'],['Prisma','#8b75ff','#bdfaff',2400,'Anillos de luz refractada.'],
+  ['Oro Fundido','#e8a800','#fff2a8',5000,'Brillo metálico líquido.'],['Plasma','#3a2bd6','#8cf3ff',7500,'Chispas de alta tensión.'],['Llama Azul','#7be8ff','#ff9a3d',10500,'Fuego frío dual.'],['Cero Absoluto','#d8f6ff','#4cc3ff',14000,'Cristales eternos.'],['Singularidad','#14001f','#ff9d3d',19000,'Horizonte gravitatorio.'],['Estrella Nova','#fff2a0','#ff6b2e',26000,'Pulso estelar intenso.'],['Escama Esmeralda','#1f9d55','#c8ffb7',35000,'Textura mítica.'],['Holograma','#10324a','#35f5ff',48000,'Proyección cuántica.'],['Eclipse','#1a1a22','#ffd34d',65000,'Corona solar oscura.'],['Soberano Cósmico','R','#fff',100000,'El máximo emblema visual.']
+];
+
+const WORLDS={
+  park:{name:'Valle Soleado',label:'🌳 VALLE SOLEADO',desc:'Praderas tranquilas y senderos abiertos. Ideal para entrenar tus lanzamientos curvos.',color:'#5fd04a',hp:.8,sp:.9,n:.8,waves:'Oleadas 1 – 10',boss:'Soberano Dorado'},
+  lava:{name:'Cráter Ígneo',label:'🌋 CRÁTER ÍGNEO',desc:'Ríos incandescentes y rocas volcánicas donde aparecen gorilas resistentes al calor.',color:'#ff6b35',hp:1.1,sp:1.05,n:1,waves:'Oleadas 11 – 20',boss:'Emperador de Lava'},
+  snow:{name:'Cumbre Helada',label:'❄️ CUMBRE HELADA',desc:'Picos nevados y ventiscas donde los enemigos avanzan con escudos de escarcha.',color:'#8eeaff',hp:1.25,sp:1.1,n:1.1,waves:'Oleadas 21 – 30',boss:'Emperador Glacial'},
+  space:{name:'Órbita Estelar',label:'🚀 ÓRBITA ESTELAR',desc:'Gravedad alterada y portales cósmicos con enemigos capaces de teletransportarse.',color:'#c59bff',hp:1.45,sp:1.18,n:1.2,waves:'Oleadas 31+',boss:'Emperador Cósmico'}
+};
+const WORLD_BASE=['park','lava','snow','space'];
+const KINGS={park:'k',lava:'l',snow:'g',space:'p'};
+const WORLD_BOSSES={park:'d',lava:'a',snow:'z',space:'x'};
+
+/* --- NOTICIAS Y ACTUALIZACIONES ORIGINALES --- */
+const NEWS_UPDATES=[
+  {
+    ver:'v2.4 • Actualización Mayor',
+    date:'19 de Noviembre, 2026',
+    title:'¡Llega la Enciclopedia de Arsenal, Mundos y Bitácora!',
+    tag:'Novedad',
+    body:'Hemos rediseñado el centro de mando del juego con cuatro secciones claras: Inicio, Guía de Mecánicas, Noticias y Tienda/Avatar. Ahora puedes consultar estadísticas de cada banana, estudiar las habilidades de los jefes de cada mundo y revisar el historial de mejoras sin salir de la partida.',
+    bullets:[
+      'Navegación superior rápida entre Inicio, Guía, Noticias y Tienda.',
+      'Ilustraciones vectoriales originales de los 4 biomas y sus mecánicas.',
+      'Fichas detalladas de tipos de proyectiles (Área, Cadena, Control y Estado).'
+    ]
+  },
+  {
+    ver:'v2.3 • Balance y Guardado',
+    date:'02 de Noviembre, 2026',
+    title:'Sistema de Respaldo Cuádruple y Poderes Activos',
+    tag:'Sistema',
+    body:'Implementamos guardado automático redundante en almacenamiento local e IndexedDB, además de exportación e importación en JSON para que nunca pierdas tus armas ni tu avatar personalizado.',
+    bullets:[
+      'Poderes tácticos activables en combate para Banana Clásica, Piñata y Colosal.',
+      'Mejora de Barricada de Acero con despliegue automático entre oleadas.',
+      '70+ piezas de vestuario en el Taller de Avatar con 5 niveles de rareza.'
+    ]
+  },
+  {
+    ver:'v2.1 • Expansión Galáctica',
+    date:'14 de Octubre, 2026',
+    title:'Nuevos Jefes de Mundo y Rotación Infinita',
+    tag:'Contenido',
+    body:'Tras superar las primeras 40 oleadas a través del Valle Soleado, Cráter Ígneo, Cumbre Helada y Órbita Estelar, los mundos comienzan a rotar dinámicamente aumentando el desafío.',
+    bullets:[
+      'Jefes cada 5 oleadas y Súper Jefes de Bioma cada 10 oleadas.',
+      'Nuevos enemigos con teletransporte, regeneración y escudos múltiples.'
+    ]
+  }
+];
+
+/* --- AVATAR SHOP --- */
+const AVATAR_RARITIES=[
+  {name:'Común',price:60,color:'#8b969e'},
+  {name:'Raro',price:140,color:'#36a9e1'},
+  {name:'Épico',price:320,color:'#a45ce5'},
+  {name:'Legendario',price:750,color:'#f5a623'},
+  {name:'Mítico',price:1600,color:'#f04483'}
+];
+const AVATAR_CATEGORIES=[
+  {key:'cabello',label:'💇 Cabello',items:[['Corte clásico','#4a2b20'],['Picos de fuego','#d94d24'],['Azul eléctrico','#2387d8'],['Rubio solar','#f6c849'],['Rosa algodón','#f28ac5'],['Plata lunar','#b9c7d8'],['Verde neón','#70d52c'],['Rizos chocolate','#673b25'],['Corte violeta','#8748bb'],['Turquesa marino','#28bfc3'],['Rojo héroe','#c92c35'],['Blanco ártico','#f1f7ff'],['Sombras negras','#191922'],['Dorado real','#e5a91b'],['Galaxia púrpura','#6040a2'],['Cian holográfico','#62e9ef'],['Llama legendaria','#fa6428'],['Prisma mítico','#d18aff']]},
+  {key:'sombreros',label:'🧢 Sombreros',items:[['Gorra deportiva','#e34b35'],['Gorro tejido','#3d79b8'],['Sombrero aventurero','#bd8744'],['Corona de cartón','#e6bd32'],['Casco de lava','#b94325'],['Casco polar','#c4eaff'],['Casco espacial','#6a62ca'],['Sombrero de mago','#653b91'],['Aureola dorada','#ffe36e'],['Casco de piloto','#527d83'],['Boina artística','#b45a7e'],['Capucha ninja','#323747'],['Orejas de zorro','#d87837'],['Cuernos mini','#a94b38'],['Sombrero tropical','#36a66d'],['Diadema estelar','#8274e8'],['Corona imperial','#efb83c'],['Casco prisma','#78dbe8']]},
+  {key:'camisas',label:'👕 Camisas',items:[['Sudadera verde inicial','#267d50'],['Camiseta roja','#d54437'],['Playera azul','#247ac0'],['Sudadera naranja','#e8792c'],['Camiseta violeta','#7542a8'],['Hoodie negro','#252630'],['Camiseta amarilla','#f0ca35'],['Chaqueta denim','#426b9c'],['Jersey de magma','#b73c22'],['Abrigo polar','#d4f4ff'],['Traje astronauta','#6a66bd'],['Chaqueta pixel','#28a9a1'],['Sudadera dragón','#8a303e'],['Camiseta arcoíris','#dd75b2'],['Chaqueta real','#ac833a'],['Traje galáctico','#3d347e'],['Armadura solar','#ed9d35'],['Hoodie del campeón','#7a37b8']]},
+  {key:'pantalones',label:'👖 Pantalones',items:[['Jeans azul inicial','#26354a'],['Pantalón negro','#22232c'],['Jogger gris','#727c89'],['Cargo verde','#536b3c'],['Pantalón rojo','#a83b40'],['Jeans celeste','#6aa9d8'],['Pantalón violeta','#59427d'],['Pantalón arena','#b79a6c'],['Pantalón magma','#9d3321'],['Pantalón nieve','#cce8f5'],['Pantalón espacial','#36346f'],['Pantalón neón','#58a83e'],['Cargo táctico','#354c4b'],['Pantalón dorado','#b58a26'],['Pantalón prisma','#925bb4'],['Pantalón dragón','#522d35'],['Pantalón estelar','#38468b'],['Pantalón mítico','#7a3b83']]},
+  {key:'zapatos',label:'👟 Zapatos',items:[['Zapatillas blancas iniciales','#f4f0e8'],['Tenis rojos','#db4545'],['Tenis azules','#367dc1'],['Botas marrones','#805233'],['Tenis neón','#83d93a'],['Botas de lava','#dd5729'],['Botas polares','#e3f8ff'],['Botas espaciales','#6663c5'],['Tenis violeta','#8a54b5'],['Zapatillas doradas','#efc044'],['Botas ninja','#34343e'],['Tenis turquesa','#37c5c5'],['Botas de explorador','#5e6d48'],['Tenis arcoíris','#ed80bf'],['Botas reales','#bd8a32'],['Zapatillas pixel','#4ad0bc'],['Botas cósmicas','#5040a0'],['Tenis legendarios','#f16b9d']]},
+  {key:'accesorios',label:'🕶️ Accesorios',items:[['Pulsera amarilla','#ffd044'],['Gafas redondas','#34343c'],['Gafas de estrella','#f4bce0'],['Bufanda roja','#d74439'],['Collar dorado','#e5bd48'],['Auriculares azules','#3797d1'],['Máscara ninja','#282a36'],['Pañuelo verde','#5c9d44'],['Alas pequeñas','#dcecff'],['Capa corta','#8043a7'],['Lentes holográficos','#4ee8ec'],['Guantes de lava','#df542b'],['Guantes polares','#e4f7ff'],['Jetpack mini','#7a68d3'],['Medalla campeón','#f5c94d'],['Efecto chispas','#d887f2'],['Escudo de energía','#69e6dd'],['Aura mítica','#fa85ca']]},
+  {key:'mochilas',label:'🎒 Mochilas',items:[['Mochila escolar','#e34b35'],['Mochila azul','#347ab8'],['Mochila verde','#4e9849'],['Mochila explorador','#967047'],['Mochila cohete','#6d62c4'],['Mochila dragón','#943d35'],['Mochila polar','#cbefff'],['Mochila magma','#e45a2a'],['Mochila pixel','#2eb7a4'],['Mochila dorada','#d7a52e'],['Mochila ninja','#333745'],['Mochila arcoíris','#d779bb'],['Mochila galáctica','#493e91'],['Mochila cristal','#75d9e8'],['Mochila de campeón','#b78436'],['Mochila alas','#b8dff4'],['Mochila prismática','#9a65d0'],['Mochila legendaria','#ed8b40']]}
+];
+const AVATAR_ITEMS=AVATAR_CATEGORIES.flatMap((cat,ci)=>cat.items.map(([name,color],i)=>{
+  const tier=Math.min(4,Math.floor(i/4));const rarity=AVATAR_RARITIES[tier];
+  return{id:cat.key+'_'+i,category:cat.key,index:i,name,color,rarity:rarity.name,rarityColor:rarity.color,price:i===0?0:rarity.price+(ci*15),pro:tier>=3};
+}));
+const AVATAR_BY_ID=Object.fromEntries(AVATAR_ITEMS.map(it=>[it.id,it]));
+const AVATAR_START=['cabello_0','camisas_0','pantalones_0','zapatos_0'];
+function avatarWear(category){const id=S.avatar&&S.avatar.equip&&S.avatar.equip[category];return AVATAR_BY_ID[id]||null;}
+
+const UP=[
+  ['d','Fuerza de Lanzamiento','+1 de daño base en cada impacto',50,25,1.38],
+  ['s','Aerodinámica','Aumenta la velocidad del búmeran',60,15,1.5],
+  ['z','Calibre Frutal','Amplía el radio de golpe',60,15,1.5],
+  ['l','Vitalidad','+1 corazón máximo de defensa',120,15,1.5],
+  ['c','Golpe Certero','+4% probabilidad de crítico (x2.5 daño)',300,15,1.55],
+  ['x','Lanzamiento Múltiple','+1 banana adicional por tiro',2500,5,2.6],
+  ['e','Barricada Reforzada','+1 punto de resistencia a la barrera',400,8,1.7],
+  ['h','Recuperación','+1 corazón restaurado al superar oleada',800,5,2.2]
+];
+const POWERUPS={
+  0:{name:'Banana Colosal',cost:50,desc:'Proyectil gigante teledirigido que inflige 5 de daño.'},
+  6:{name:'Piñata Festiva',cost:100,desc:'Detona sobre el grupo principal causando 3 de daño en área.'},
+  14:{name:'AGUACERO TITÁNICO',cost:500,desc:'Tormenta cósmica que golpea a todos los enemigos por 30 de daño.'}
+};
+
+const SAVE_KEYS=['bt1','bt1_backup','bt1_recovery'];
+const SAVE_DB='BananaThrowSaveDB',SAVE_VERSION=5;
+const NAME_PREFIX='BT_AUTOSAVE_V5:';
+const freshSave=()=>({
+  b:0,u:{d:0,s:0,z:0,l:0,c:0,x:0,e:0,h:0},
+  w:[0],ws:0,k:[0],ks:0,best:0,bar:0,
+  avatar:{owned:[...AVATAR_START],equip:{cabello:'cabello_0',sombreros:null,camisas:'camisas_0',pantalones:'pantalones_0',zapatos:'zapatos_0',accesorios:null,mochilas:null}},
+  worldOrder:[...WORLD_BASE],run:null,shop:null
+});
+
+function cleanSave(raw){
+  const d=freshSave(),v=raw&&typeof raw==='object'?raw:{};
+  d.storageConsent=typeof v.storageConsent==='boolean'?v.storageConsent:true;
+  d.b=Math.max(0,Math.floor(Number(v.b)||0));
+  for(const [k,,,,mxl] of UP)d.u[k]=Math.max(0,Math.min(mxl,Math.floor(Number(v.u&&v.u[k])||0)));
+  d.w=Array.isArray(v.w)?[...new Set(v.w.map(Number).filter(i=>Number.isInteger(i)&&i>=0&&i<WP.length))]:[0];
+  if(!d.w.includes(0))d.w.unshift(0);
+  d.ws=d.w.includes(Number(v.ws))?Number(v.ws):0;
+  d.k=Array.isArray(v.k)?[...new Set(v.k.map(Number).filter(i=>Number.isInteger(i)&&i>=0&&i<SK.length))]:[0];
+  if(!d.k.includes(0))d.k.unshift(0);
+  d.ks=d.k.includes(Number(v.ks))?Number(v.ks):0;
+  d.best=Math.max(0,Math.floor(Number(v.best)||0));
+  d.bar=Math.max(0,Math.min(5,Math.floor(Number(v.bar)||0)));
+  const avatar=v.avatar&&typeof v.avatar==='object'?v.avatar:{};
+  const validAvatar=new Set(AVATAR_ITEMS.map(it=>it.id));
+  d.avatar={owned:[...new Set([...AVATAR_START,...(Array.isArray(avatar.owned)?avatar.owned.filter(id=>validAvatar.has(id)):[])])],equip:{}};
+  for(const cat of AVATAR_CATEGORIES){
+    const chosen=avatar.equip&&avatar.equip[cat.key];
+    const starter=AVATAR_START.find(id=>id.startsWith(cat.key+'_'))||null;
+    d.avatar.equip[cat.key]=d.avatar.owned.includes(chosen)?chosen:starter;
+  }
+  const savedWorlds=Array.isArray(v.worldOrder)?v.worldOrder.filter(w=>Object.prototype.hasOwnProperty.call(WORLDS,w)):[];
+  d.worldOrder=[...WORLD_BASE,...savedWorlds.slice(4)];
+  if(v.run&&typeof v.run==='object'&&v.run.active&&Array.isArray(v.run.gs))d.run=v.run;
+  if(v.shop&&typeof v.shop==='object'&&Number(v.shop.wave)>0){
+    d.shop={wave:Math.max(1,Math.floor(Number(v.shop.wave)||1)),bh:Math.max(0,Math.min(12,Math.floor(Number(v.shop.bh)||0))),lives:Math.max(1,Math.floor(Number(v.shop.lives)||5))};
+  }
+  return d;
+}
+function decodeSave(raw){
+  try{
+    const o=JSON.parse(raw),data=o&&o.data?o.data:o;
+    if(!data||typeof data!=='object'||(!('b'in data)&&!('w'in data)))return null;
+    return{data:cleanSave(data),savedAt:Number(o.savedAt)||0,version:Number(o.version)||1};
+  }catch(e){return null;}
+}
+let S=freshSave(),latestSaveAt=0,saveClock=0,userTouched=false,dbPromise=null,lastSaveToastAt=0;
+let storageConsent=true;
+
+function readWindowNameSave(){
+  try{
+    if(typeof window.name==='string'&&window.name.startsWith(NAME_PREFIX)){
+      return decodeSave(window.name.slice(NAME_PREFIX.length));
+    }
+  }catch(e){}
+  return null;
+}
+function writeWindowNameSave(payload){
+  try{
+    window.name=NAME_PREFIX+payload;
+  }catch(e){}
+}
+(function loadLocal(){
+  let best=null;
+  const candidates=[];
+  for(const key of SAVE_KEYS){
+    try{const v=localStorage.getItem(key);if(v)candidates.push(decodeSave(v));}catch(e){}
+  }
+  const wn=readWindowNameSave();
+  if(wn)candidates.push(wn);
+  for(const d of candidates){
+    if(d&&(!best||d.savedAt>best.savedAt))best=d;
+  }
+  if(best){
+    S=best.data;
+    storageConsent=typeof S.storageConsent==='boolean'?S.storageConsent:true;
+    latestSaveAt=best.savedAt;
+  }
+})();
+
+function runSnapshot(){
+  if(st!=='play')return null;
+  return{active:true,wave,left,sp,boss,bh,lives,gs:gs.filter(g=>!g.dead).map(g=>({...g})),bm:bm.map(b=>({x0:b.x0,y0:b.y0,ux:b.ux,uy:b.uy,a:b.a,b:b.b,t:b.t,dur:b.dur,x:b.x,y:b.y,w:b.w,ex:!!b.ex,specialUsed:!!b.specialUsed,pi:!!b.pi}))};
+}
+function openSaveDB(){
+  if(dbPromise)return dbPromise;
+  dbPromise=new Promise((resolve,reject)=>{
+    if(!('indexedDB'in window)){reject(new Error('IndexedDB no disponible'));return;}
+    const req=indexedDB.open(SAVE_DB,1);
+    req.onupgradeneeded=()=>{const db=req.result;if(!db.objectStoreNames.contains('saves'))db.createObjectStore('saves');};
+    req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error||new Error('Error DB'));
+  });
+  return dbPromise;
+}
+function writeDB(payload){
+  openSaveDB().then(db=>new Promise((resolve,reject)=>{
+    const tx=db.transaction('saves','readwrite');
+    tx.objectStore('saves').put(payload,'main');
+    tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);
+  })).catch(()=>{});
+}
+
+/* --- FUNCIÓN UNIFICADA DE GUARDADO --- */
+function sv(notify=false){
+  S.storageConsent=!!storageConsent;
+  S.run=runSnapshot();
+  if(st==='shop')S.shop={wave,bh,lives};else if(st==='play'||st==='over')S.shop=null;
+  const now=Date.now(),payload=JSON.stringify({version:SAVE_VERSION,savedAt:now,data:S});
+  latestSaveAt=now;
+  if(!storageConsent){
+    writeWindowNameSave(payload);
+    if(notify)showToast('💾 Guardado temporal de sesión (sin persistencia local)');
+    return;
+  }
+  try{localStorage.setItem('bt1_recovery',payload);}catch(e){}
+  try{localStorage.setItem('bt1_backup',payload);}catch(e){}
+  try{localStorage.setItem('bt1',payload);}catch(e){}
+  writeWindowNameSave(payload);
+  writeDB(payload);
+  if(notify&&(now-lastSaveToastAt>2500)){
+    lastSaveToastAt=now;
+    showToast('💾 Autoguardado activo');
+  }
+}
+
+function restoreRun(){
+  const r=S.run;
+  if(r&&r.active){
+    wave=Math.max(1,Number(r.wave)||1);currentWorld=worldForWave(wave);
+    left=Math.max(0,Number(r.left)||0);sp=Math.max(0,Number(r.sp)||0);
+    boss=Number(r.boss)||0;bh=Math.max(0,Math.min(bhMax(),Number(r.bh)||0));
+    lives=Math.max(1,Number(r.lives)||mx());
+    gs=Array.isArray(r.gs)?r.gs.map(g=>({...g})):[];
+    bm=Array.isArray(r.bm)?r.bm.map(b=>({...b,h:new Map()})):[];
+    fx=[];st='play';return true;
+  }
+  if(S.shop&&S.shop.wave){
+    wave=S.shop.wave;currentWorld=worldForWave(wave);
+    bh=S.shop.bh;lives=Math.min(mx(),S.shop.lives);
+    gs=[];bm=[];fx=[];left=0;boss=0;st='shop';return true;
+  }
+  return false;
+}
+async function recoverIndexedDB(){
+  if(!storageConsent)return;
+  try{
+    const db=await openSaveDB();
+    const raw=await new Promise((resolve,reject)=>{
+      const tx=db.transaction('saves','readonly'),req=tx.objectStore('saves').get('main');
+      req.onsuccess=()=>resolve(req.result||null);req.onerror=()=>reject(req.error);
+    });
+    const candidate=raw&&decodeSave(raw);
+    if(candidate&&candidate.savedAt>latestSaveAt&&!userTouched){
+      S=candidate.data;latestSaveAt=candidate.savedAt;
+      restoreRun();ui();
+    }
+  }catch(e){}
+}
+
+/* --- ESTADO DE NAVEGACIÓN Y JUEGO --- */
+const bhMax=()=>2+S.u.e, mx=()=>5+S.u.l, dmg=()=>WP[S.ws].d+S.u.d, spd=()=>WP[S.ws].s*(1+.12*S.u.s), siz=()=>WP[S.ws].z*(1+.1*S.u.z);
+const cost=k=>{const u=UP.find(u=>u[0]==k);return Math.round(u[3]*u[5]**S.u[k]);};
+
+let st='menu';       // 'menu' | 'play' | 'shop' | 'over'
+let PAGE='home';     // 'home' | 'guide' | 'news' | 'shop' | 'legal' | 'contact'
+let GUIDE_TAB='mechanics'; // 'mechanics' | 'weapons' | 'worlds' | 'enemies'
+let LEGAL_TAB='privacy';   // 'privacy' | 'terms' | 'storage'
+let T='u';           // 'u' (mejoras) | 'w' (armas) | 'k' (aspectos) | 'a' (avatar)
+let AVATAR_TAB='camisas';
+
+const SITE_META={
+  domain:'https://bananathrow.example',
+  ownerName:'Mateo Daniel Delgado',
+  ownerAgeStatus:'Mayor de edad (18+ años)',
+  contactEmail:'mdelgadomenjivar@gmail.com',
+  location:'Panamá Oeste, Panamá',
+  updated:'19 de noviembre de 2026'
+};
+const TX=(s,a,b,z,f='#fff',al='center')=>{x.font=z+'px Bangers,"Comic Sans MS",cursive';x.textAlign=al;x.lineWidth=z/5;x.strokeStyle='#2b1b0e';x.lineJoin='round';x.strokeText(s,a,b);x.fillStyle=f;x.fillText(s,a,b);};
+const P=g=>{const s=.4+g.p*.9,a=g.a>0?Math.sin(Math.PI*g.a/.4)*45*s:0;return{x:240+g.lx*(30+190*g.p),y:190+g.p*500-a,s};};
+const pop=(a,b,s)=>fx.push({x:a,y:b,s,t:0});
+
+function showToast(msg){
+  const old=document.querySelector('.toastMsg');if(old)old.remove();
+  const el=document.createElement('div');el.className='toastMsg';el.textContent=msg;
+  document.body.appendChild(el);
+  setTimeout(()=>{if(el.parentNode)el.remove();},2400);
+}
+
+/* --- ILUSTRACIONES SVG ORIGINALES PARA LA GUÍA Y NOTICIAS --- */
+function svgIllustration(type){
+  const svgs={
+    hero:`<svg viewBox="0 0 360 115" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#69d2ff"/><stop offset="100%" stop-color="#d4f7ff"/></linearGradient>
+        <linearGradient id="banG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fff066"/><stop offset="100%" stop-color="#ffaa00"/></linearGradient>
+      </defs>
+      <rect width="360" height="115" fill="url(#skyG)"/>
+      <circle cx="310" cy="28" r="18" fill="#ffe14d" stroke="#2b1b0e" stroke-width="2.5"/>
+      <path d="M0 95 Q90 72 180 92 T360 88 L360 115 L0 115 Z" fill="#63c74d" stroke="#2b1b0e" stroke-width="2.5"/>
+      <path d="M75 92 C40 35, 220 15, 265 55 C235 88, 120 88, 82 92" fill="none" stroke="#ff6e26" stroke-width="3" stroke-dasharray="6 5"/>
+      <g transform="translate(252,44) rotate(22)">
+        <path d="M-18 -6 Q0 18 22 -8 Q4 6 -18 -6 Z" fill="url(#banG)" stroke="#2b1b0e" stroke-width="2.5"/>
+      </g>
+      <circle cx="72" cy="70" r="13" fill="#ffcf9e" stroke="#2b1b0e" stroke-width="2.5"/>
+      <path d="M59 66 Q72 52 85 66 Z" fill="#e34b35" stroke="#2b1b0e" stroke-width="2"/>
+      <rect x="60" y="83" width="24" height="20" rx="6" fill="#267d50" stroke="#2b1b0e" stroke-width="2.5"/>
+      <circle cx="290" cy="72" r="16" fill="#7a4e32" stroke="#2b1b0e" stroke-width="2.5"/>
+      <circle cx="285" cy="69" r="2.5" fill="#fff"/><circle cx="295" cy="69" r="2.5" fill="#fff"/>
+      <ellipse cx="290" cy="76" rx="7" ry="4.5" fill="#d9a77c" stroke="#2b1b0e" stroke-width="1.8"/>
+    </svg>`,
+    park:`<svg viewBox="0 0 80 80" width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+      <rect width="80" height="80" rx="10" fill="#9be7ff"/>
+      <circle cx="62" cy="18" r="9" fill="#ffd93b" stroke="#2b1b0e" stroke-width="2"/>
+      <path d="M0 58 Q40 44 80 58 L80 80 L0 80 Z" fill="#5fd04a" stroke="#2b1b0e" stroke-width="2"/>
+      <rect x="18" y="36" width="8" height="22" fill="#7c4d2b" stroke="#2b1b0e" stroke-width="2"/>
+      <circle cx="22" cy="30" r="14" fill="#3da336" stroke="#2b1b0e" stroke-width="2"/>
+    </svg>`,
+    lava:`<svg viewBox="0 0 80 80" width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+      <rect width="80" height="80" rx="10" fill="#3b1622"/>
+      <polygon points="12,72 34,24 46,24 68,72" fill="#5a3430" stroke="#2b1b0e" stroke-width="2"/>
+      <path d="M34 24 Q40 36 46 24 L52 44 Q40 38 28 44 Z" fill="#ff6b26"/>
+      <path d="M0 66 Q20 60 40 66 T80 66 L80 80 L0 80 Z" fill="#ff8e2b" stroke="#2b1b0e" stroke-width="2"/>
+    </svg>`,
+    snow:`<svg viewBox="0 0 80 80" width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+      <rect width="80" height="80" rx="10" fill="#234b6e"/>
+      <polygon points="8,68 32,20 54,68" fill="#bfe9ff" stroke="#2b1b0e" stroke-width="2"/>
+      <polygon points="34,68 56,28 76,68" fill="#e6f7ff" stroke="#2b1b0e" stroke-width="2"/>
+      <circle cx="20" cy="18" r="2.5" fill="#fff"/><circle cx="62" cy="16" r="2.5" fill="#fff"/>
+      <rect x="0" y="64" width="80" height="16" fill="#fff" stroke="#2b1b0e" stroke-width="2"/>
+    </svg>`,
+    space:`<svg viewBox="0 0 80 80" width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+      <rect width="80" height="80" rx="10" fill="#171236"/>
+      <circle cx="16" cy="18" r="2" fill="#fff"/><circle cx="64" cy="22" r="2.5" fill="#ffd93b"/><circle cx="22" cy="62" r="2" fill="#9fe8ff"/>
+      <circle cx="42" cy="40" r="15" fill="#8a6be0" stroke="#2b1b0e" stroke-width="2"/>
+      <ellipse cx="42" cy="40" rx="26" ry="6" fill="none" stroke="#ffd93b" stroke-width="2.5" transform="rotate(-20 42 40)"/>
+    </svg>`
+  };
+  return svgs[type]||svgs.park;
+}
+svgIllustration.weaponCat=function(cat){
+  const map={
+    'Básica':['#ffd93b','🍌'],
+    'Impacto':['#ff8a3d','💥'],
+    'Dispersión':['#8fd13f','🔱'],
+    'Área':['#ff5e3a','💣'],
+    'Estado':['#9b59d0','🧪'],
+    'Elemental':['#ff6a1f','🔥'],
+    'Control':['#55dfff','❄️'],
+    'Cadena':['#ffe94d','⚡'],
+    'Velocidad':['#ff4bca','🚀'],
+    'Definitiva':['#ffd700','👑']
+  };
+  const [bg,ico]=map[cat]||['#ffd93b','🍌'];
+  return `<div class="guideArt" style="background:${bg};font-size:1.9em">${ico}</div>`;
+};
+
+/* --- LÓGICA PRINCIPAL DEL JUEGO --- */
+function deployBarricade(){if(bh<=0&&S.bar>0){S.bar--;bh=bhMax();pop(240,635,'¡BARRICADA!');}}
+function worldForWave(w){
+  const block=Math.max(0,Math.floor((w-1)/10));
+  if(!Array.isArray(S.worldOrder))S.worldOrder=[...WORLD_BASE];
+  while(S.worldOrder.length<=block){
+    const last=S.worldOrder[S.worldOrder.length-1];
+    const choices=Object.keys(WORLDS).filter(key=>key!==last);
+    S.worldOrder.push(choices[Math.random()*choices.length|0]);
+  }
+  return S.worldOrder[block]||'park';
+}
+function nw(){
+  const previous=currentWorld;
+  wave++;currentWorld=worldForWave(wave);
+  if(previous!==currentWorld)pop(240,160,'🌍 ¡'+WORLDS[currentWorld].name.toUpperCase()+'!');
+  deployBarricade();
+  left=Math.max(3,Math.round((5+wave*2)*WORLDS[currentWorld].n));
+  sp=0;bm=[];
+  boss=wave%10===0?2:(wave%5===0?1:0);
+  if(boss)left++;
+}
+function pick(){
+  if(currentWorld==='park'&&wave<=10){
+    const p=['n','n','r'];
+    if(wave>2)p.push('n','t');
+    if(wave>4)p.push('e','s');
+    if(wave>7)p.push('t','e','s','r');
+    if(wave>4)p.push('G');
+    if(wave>6)p.push('D');
+    return p[Math.random()*p.length|0];
+  }
+  const a=['n'];
+  if(wave>1)a.push('r','n');if(wave>2)a.push('t');if(wave>3)a.push('e','s');
+  if(wave>5)a.push('t','e','s','r');if(wave>6)a.push('w');if(wave>8)a.push('f');
+  if(wave>10)a.push('c');if(wave>12)a.push('m');if(wave>14)a.push('i');
+  if(wave>16)a.push('q');if(wave>19)a.push('b');
+  if(currentWorld==='lava')a.push('v','j','f','v','R','S','S');
+  else if(currentWorld==='snow')a.push('h','y','q','h','I','W','W');
+  else if(currentWorld==='space')a.push('u','o','x','u','Q','Z','Q');
+  else a.push('G','D','G');
+  return a[Math.random()*a.length|0];
+}
+function mk(k,p=0,lx=(Math.random()*2-1)*.85){
+  const h=Math.ceil(GT[k].h*(1+wave*.1)*WORLDS[currentWorld].hp);
+  gs.push({k,hp:h,mh:h,p,lx,sh:GT[k].sh||(k==='e'?3:(k==='q'||k==='z'?3:0)),j:2,a:0,sm:3,phaseT:1.5+Math.random()*2,state:'walk',anim:Math.random()*6,attackT:0,fade:0});
+  if(GT[k].bs)pop(240,215,'👑 ¡'+GT[k].m.toUpperCase()+'!');
+}
+function defeat(g,q=P(g)){
+  if(g.hp<=0&&!g.rewarded){
+    g.state='defeated';g.fade=.72;g.rewarded=1;
+    S.b+=GT[g.k].o;pop(q.x,q.y-30,'+'+GT[g.k].o+'🍌');
+    sv();
+  }
+}
+function hit(g,d,wi=S.ws,applySpecial=true,crit=false){
+  const q=P(g),weapon=WP[wi]||WP[0];
+  if(g.k==='o'&&g.dodge>0&&Math.random()<.58){pop(q.x,q.y-18,'✨ ¡INTANGIBLE!');return;}
+  if(g.sh>0){g.sh--;pop(q.x,q.y,'¡CLANG!');return;}
+  if(crit&&Math.random()<S.u.c*.04){d=Math.ceil(d*2.5);pop(q.x,q.y-42,'💥 ¡CRÍTICO!');}
+  g.hp-=d;g.state='hurt';g.hurtT=.18;pop(q.x,q.y,['¡POW!','¡BAM!','¡ZAS!'][Math.random()*3|0]);
+  if(applySpecial){
+    if(weapon.fx==='thorn'){g.bleed=Math.max(g.bleed||0,1.8);g.bleedTick=.2;pop(q.x,q.y-20,'🩸 ¡ESPINAS!');}
+    if(weapon.fx==='fire'){g.burn=Math.max(g.burn||0,2.4);g.burnTick=.15;pop(q.x,q.y-20,'🔥 ¡EN LLAMAS!');}
+    if(weapon.fx==='poison'){g.poison=Math.max(g.poison||0,3.2);g.poisonTick=.35;pop(q.x,q.y-20,'☠️ ¡VENENO!');}
+    if(weapon.fx==='ice'){g.freeze=Math.max(g.freeze||0,1.45);pop(q.x,q.y-20,'❄️ ¡CONGELADO!');}
+    if(weapon.fx==='electric'){
+      let chained=0;
+      for(const other of gs){
+        if(other===g||other.dead||other.state==='defeated'||chained>=3)continue;
+        const z=P(other);
+        if(Math.hypot(z.x-q.x,z.y-q.y)<145){hit(other,2,wi,false);pop((q.x+z.x)/2,(q.y+z.y)/2,'⚡');chained++;}
+      }
+    }
+    if(weapon.fx==='storm'){
+      let c=0;
+      for(const o of gs){
+        if(o===g||o.dead||o.state==='defeated'||c>=6)continue;
+        const z=P(o);
+        if(Math.hypot(z.x-q.x,z.y-q.y)<190){hit(o,3,wi,false);pop(z.x,z.y-10,'⚡');c++;}
+      }
+    }
+    if(weapon.fx==='void'){
+      pop(q.x,q.y-20,'🌀 ¡ATRAÍDO!');
+      for(const o of gs){
+        if(o.dead||o.state==='defeated'||o.state==='attack')continue;
+        const z=P(o);
+        if(Math.hypot(z.x-q.x,z.y-q.y)<170)o.p=Math.max(0,o.p-.07);
+      }
+    }
+    if(weapon.fx==='nuke'){g.poison=Math.max(g.poison||0,4);g.poisonTick=.3;pop(q.x,q.y-20,'☢️');}
+    if(weapon.fx==='pinata'){
+      pop(q.x,q.y-28,'🎉 ¡PIÑATA!');
+      let splinters=0;
+      for(const other of gs){
+        if(other===g||other.dead||other.state==='defeated'||splinters>=6)continue;
+        const z=P(other);
+        if(Math.hypot(z.x-q.x,z.y-q.y)<150){hit(other,1,wi,false);pop(z.x,z.y-18,'🍌');splinters++;}
+      }
+    }
+  }
+  defeat(g,q);
+}
+function th(tx,ty){
+  if(bm.length||st!='play')return;
+  ty=Math.min(ty,600);
+  const x0=240,y0=730;let ux=tx-x0,uy=ty-y0;
+  const l=Math.hypot(ux,uy)||1,L=Math.max(170,l);
+  ux/=l;uy/=l;
+  throwDirX=ux;throwDirY=uy;throwAnimT=0.34;
+  const wi=S.ws,n=WP[wi].m+S.u.x;
+  for(let i=0;i<n;i++){
+    const o=n==1?0:(i-(n-1)/2)*Math.min(WP[wi].f||.3,1.3/Math.max(1,n-1));
+    const c=Math.cos(o),s=Math.sin(o);
+    bm.push({x0,y0,ux:ux*c-uy*s,uy:ux*s+uy*c,a:L/2,b:L*.3,t:0,dur:1.15/spd(),h:new Map(),x:x0,y:y0,w:wi,ex:false,specialUsed:false});
+  }
+}
+function useSpecial(){
+  if(st!=='play')return;
+  const power=POWERUPS[S.ws];
+  if(!power){pop(240,145,'¡EQUIPA CLÁSICA, PIÑATA O COLOSAL!');return;}
+  const targets=gs.filter(g=>!g.dead&&g.state!=='defeated'&&g.hp>0);
+  if(!targets.length){pop(240,145,'¡ESPERA A LOS GORILAS!');return;}
+  if(S.b<power.cost){pop(240,145,'¡FALTAN '+(power.cost-S.b)+' BANANAS!');return;}
+  S.b-=power.cost;
+  const closest=[...targets].sort((a,b)=>b.p-a.p)[0],cq=P(closest);
+  if(S.ws===0){
+    hit(closest,5,0,false);powerFX.push({kind:'classic',t:0,x:240,y:700,tx:cq.x,ty:cq.y});pop(cq.x,cq.y-55,'🍌 ¡BANANA COLOSAL!');
+  }else if(S.ws===6){
+    const cx=cq.x,cy=cq.y;let count=0;
+    for(const g of targets){const q=P(g);if(Math.hypot(q.x-cx,q.y-cy)<255&&count<14){hit(g,3,6,false);count++;}}
+    powerFX.push({kind:'pinata',t:0,x:240,y:700,tx:cx,ty:cy});pop(cx,cy-60,'🎉 ¡PIÑATA VOLADORA!');
+  }else if(S.ws===14){
+    for(const g of targets)hit(g,30,14,false);
+    powerFX.push({kind:'nova',t:0,x:240,y:390,tx:240,ty:390});shk=.75;pop(240,330,'☄️ ¡AGUACERO TITÁNICO!');
+  }
+  sv();
+}
+
+cv.addEventListener('pointerdown',e=>{
+  const r=cv.getBoundingClientRect(),px=(e.clientX-r.left)*W/r.width,py=(e.clientY-r.top)*H/r.height;
+  userTouched=true;
+  if(st==='play'){
+    if(px>=400&&px<=468&&py>=12&&py<=46){
+      st='menu';PAGE='home';sv();ui();return;
+    }
+    if(px>=96&&px<=384&&py>=88&&py<=137){useSpecial();return;}
+    th(px,py);
+  }
+});
+
+function up(dt){
+  sp-=dt;
+  if(left>0&&sp<=0){
+    const key=boss?(boss===2?(boss=0,WORLD_BOSSES[currentWorld]):(boss=0,KINGS[currentWorld])):pick();
+    mk(key);left--;sp=Math.max(.55,1.5-wave*.07);
+  }
+  for(const g of gs){
+    if(g.state==='defeated'){g.fade-=dt;if(g.fade<=0)g.dead=1;continue;}
+    if(g.hurtT>0){g.hurtT-=dt;if(g.hurtT<=0)g.state='walk';}
+    for(const [key,step,label] of [['bleed',.42,'🩸'],['burn',.32,'🔥'],['poison',.58,'☠️']]){
+      if(g[key]>0){
+        g[key]=Math.max(0,g[key]-dt);g[key+'Tick']=(g[key+'Tick']||0)-dt;
+        if(g[key+'Tick']<=0){g[key+'Tick']=step;g.hp-=1;pop(P(g).x,P(g).y-22,label);if(g.hp<=0)defeat(g);}
+      }
+    }
+    if(g.state==='defeated')continue;
+    const Q=GT[g.k];
+    let v=Q.v*(1+wave*.02)*WORLDS[currentWorld].sp;
+    if(g.freeze>0){g.freeze=Math.max(0,g.freeze-dt);v*=.12;}
+    if(g.k=='s'){g.j-=dt;if(g.j<0&&g.a<=0){g.a=.4;g.j=1.5+Math.random()*1.5;}if(g.a>0){g.a-=dt;v*=5;}}
+    if(g.k=='k'){g.sm-=dt;if(g.sm<0){g.sm=4;mk('n',g.p,g.lx-.3);mk('r',g.p,g.lx+.3);}}
+    if(g.k==='m'){g.sm-=dt;if(g.sm<0){g.sm=5.5;mk('n',Math.max(0,g.p-.12),g.lx-.22);pop(P(g).x,P(g).y-34,'✨ ¡INVOCACIÓN!');}}
+    if(g.k==='i'){g.j-=dt;if(g.j<0){g.j=1.7;g.a=.28;}if(g.a>0){g.a-=dt;v*=3.2;}}
+    if(g.k==='b'&&g.hp<g.mh*.5)v*=1.55;
+    if(g.k==='j'&&g.p>.55)v*=1.55;
+    if(g.k==='y'){g.j-=dt;if(g.j<0&&g.a<=0){g.a=.42;g.j=1.7;}if(g.a>0){g.a-=dt;v*=4.5;}}
+    if(g.k==='u'){g.phaseT-=dt;if(g.phaseT<=0){g.phaseT=2.2;g.p=Math.min(.9,g.p+.12);g.lx=Math.max(-.85,Math.min(.85,g.lx+(Math.random()-.5)*.5));pop(P(g).x,P(g).y-24,'🛸 ¡SALTO!');}}
+    if(g.k==='o'){g.phaseT-=dt;if(g.phaseT<=0){g.phaseT=2.1;g.dodge=.75;}if(g.dodge>0)g.dodge=Math.max(0,g.dodge-dt);}
+    if(Q.sm){g.sm-=dt;if(g.sm<0){g.sm=Q.si||5;mk(Q.sm,Math.max(0,g.p-.08),Math.max(-.8,Math.min(.8,g.lx+(Math.random()-.5)*.45)));pop(P(g).x,P(g).y-34,'👑 ¡REFUERZOS!');}}
+    if(Q.tp){g.phaseT-=dt;if(g.phaseT<=0){g.phaseT=2.4;g.p=Math.min(.9,g.p+.1);g.lx=Math.max(-.85,Math.min(.85,g.lx+(Math.random()-.5)*.55));pop(P(g).x,P(g).y-24,'🌀 ¡PORTAL!');}}
+    if(Q.en&&g.hp<g.mh*.5)v*=1.45;
+    if(Q.ds){g.j-=dt;if(g.j<0){g.j=Q.ds;g.a=.3;}if(g.a>0){g.a-=dt;v*=3;}}
+    if(Q.rg&&g.hp<g.mh){g.rgT=(g.rgT||Q.rg)-dt;if(g.rgT<=0){g.rgT=Q.rg;g.hp=Math.min(g.mh,g.hp+1);pop(P(g).x,P(g).y-24,'💚 +1');}}
+
+    const stop=(bh>0&&!GT[g.k].bs)?.78:1;
+    if(g.p>=stop){
+      g.p=stop;g.state='attack';g.anim+=dt*13;g.attackT-=dt;
+      if(g.attackT<=0){
+        g.attackT=stop<1?.68:.82;shk=.35;
+        if(stop<1){bh--;pop(240,635,'¡CRAC!');if(bh<=0)deployBarricade();}
+        else{
+          lives--;pop(240,700,'-1 ❤️');
+          if(lives<=0){
+            S.best=Math.max(S.best,wave);st='over';S.run=null;S.shop=null;sv();ui();return;
+          }
+        }
+      }
+    }else{
+      if(g.state!=='hurt')g.state='walk';
+      g.p+=v*dt;g.anim+=dt*(8+v*45);
+    }
+  }
+  gs=gs.filter(g=>!g.dead);
+
+  for(const b of bm){
+    b.t+=dt;const u=Math.min(1,b.t/b.dur),th=2*Math.PI*u,px=-b.uy,py=b.ux;
+    b.x=b.x0+b.ux*b.a*(1-Math.cos(th))+px*b.b*Math.sin(th);
+    b.y=b.y0+b.uy*b.a*(1-Math.cos(th))+py*b.b*Math.sin(th);
+    if(WP[b.w].x&&u>=.5&&!b.ex){
+      b.ex=1;const R=(WP[b.w].r||130)*siz();shk=.4;pop(b.x,b.y,'💥 ¡BOOM!');
+      for(const g of gs){
+        if(g.dead||g.state==='defeated')continue;
+        if(Math.hypot(P(g).x-b.x,P(g).y-b.y)<R)hit(g,dmg()+(WP[b.w].xd||0),b.w,true,true);
+      }
+    }
+    const seg=u<.5?0:1;
+    for(const g of gs){
+      if(g.dead||g.state==='defeated'||b.h.get(g)===seg)continue;
+      const q=P(g);
+      if(Math.hypot(q.x-b.x,q.y-b.y)<GT[g.k].r*q.s+24*siz()){
+        b.h.set(g,seg);hit(g,dmg(),b.w,true,true);
+      }
+    }
+  }
+  bm=bm.filter(b=>b.t<b.dur);
+  if(left<=0&&!gs.length&&!bm.length){
+    S.best=Math.max(S.best,wave);
+    if(S.u.h>0&&lives<mx()){const heal=Math.min(mx()-lives,S.u.h);lives+=heal;pop(240,120,'+'+heal+' ❤️');}
+    st='shop';PAGE='shop';T='u';sv();ui();
+  }
+}
+
+/* --- DIBUJADO DE PERSONAJES Y ESCENARIOS --- */
+function drawAvatar(cx,cy,scale=1,swing=0){
+  const hat=avatarWear('sombreros'),hair=avatarWear('cabello'),shirt=avatarWear('camisas');
+  const pants=avatarWear('pantalones'),shoes=avatarWear('zapatos'),acc=avatarWear('accesorios'),bag=avatarWear('mochilas');
+  const dur=0.34;
+  const isThrowing=throwAnimT>0;
+  const p=isThrowing?Math.min(1,Math.max(0,(dur-throwAnimT)/dur)):0;
+  const thrust=isThrowing?Math.sin(p*Math.PI):0;
+  const armPitch=0.15-thrust*1.15;
+  const forwardPush=thrust*7;
+  const bodyTilt=thrust*0.05;
+  const idleBob=Math.sin(tm*3.2)*2.2;
+  const aimOffsetX=isThrowing?throwDirX*forwardPush*0.5:0;
+
+  x.save();
+  x.translate(cx+aimOffsetX,cy);
+  x.scale(scale,scale);
+
+  x.fillStyle='rgba(20,12,5,0.28)';
+  x.beginPath();x.ellipse(0,22,34,10,0,0,Math.PI*2);x.fill();
+
+  if(acc&&acc.index>=8){
+    const pulse=1+Math.sin(tm*5)*0.08;
+    const grad=x.createRadialGradient(0,-42,8,0,-42,56*pulse);
+    grad.addColorStop(0,acc.color+'66');
+    grad.addColorStop(1,'rgba(255,255,255,0)');
+    x.fillStyle=grad;
+    x.beginPath();x.arc(0,-42,56*pulse,0,Math.PI*2);x.fill();
+  }
+
+  if(bag){
+    x.save();
+    x.translate(0,idleBob*0.7);
+    x.fillStyle=bag.color;x.strokeStyle='#2b1b0e';x.lineWidth=3;
+    x.beginPath();x.roundRect(-27,-54,54,38,14);x.fill();x.stroke();
+    x.fillStyle='rgba(0,0,0,0.16)';
+    x.beginPath();x.roundRect(-19,-36,38,16,7);x.fill();
+    x.strokeStyle='#ffd93b';x.lineWidth=2;
+    x.beginPath();x.moveTo(-12,-36);x.lineTo(12,-36);x.stroke();
+    x.restore();
+  }
+
+  const legSpread=isThrowing?3:0;
+  const pCol=pants?pants.color:'#2b4162';
+  x.fillStyle=pCol;x.strokeStyle='#2b1b0e';x.lineWidth=3;
+  x.beginPath();x.roundRect(-19-legSpread,-18,16,28,7);x.fill();x.stroke();
+  x.beginPath();x.roundRect(3+legSpread,-18,16,28,7);x.fill();x.stroke();
+  x.strokeStyle='rgba(255,255,255,0.22)';x.lineWidth=2;
+  x.beginPath();x.moveTo(-15-legSpread,-6);x.lineTo(-7-legSpread,-6);x.moveTo(7+legSpread,-6);x.lineTo(15+legSpread,-6);x.stroke();
+
+  const sCol=shoes?shoes.color:'#f4f0e8';
+  for(const side of [-1,1]){
+    const sx=side*(11+legSpread);
+    x.save();x.translate(sx,14);
+    x.fillStyle=sCol;x.strokeStyle='#2b1b0e';x.lineWidth=3;
+    x.beginPath();x.roundRect(-13,-7,26,15,8);x.fill();x.stroke();
+    x.fillStyle='#fffdf7';
+    x.beginPath();x.roundRect(-12,3,24,5,3);x.fill();
+    x.fillStyle='rgba(255,255,255,0.45)';
+    x.beginPath();x.ellipse(0,-3,7,2.5,0,0,Math.PI*2);x.fill();
+    x.restore();
+  }
+
+  x.save();
+  x.translate(0,-16+idleBob);
+  x.rotate(bodyTilt);
+
+  const shCol=shirt?shirt.color:'#267d50';
+  x.fillStyle=shCol;x.strokeStyle='#2b1b0e';x.lineWidth=3;
+  x.beginPath();x.roundRect(-24,-40,48,42,15);x.fill();x.stroke();
+
+  x.fillStyle='rgba(0,0,0,0.14)';
+  x.beginPath();x.roundRect(8,-38,14,38,10);x.fill();
+  x.fillStyle='#ffd93b';x.strokeStyle='#2b1b0e';x.lineWidth=2.2;
+  x.beginPath();x.ellipse(0,-38,11,5,0,0,Math.PI);x.fill();x.stroke();
+  x.fillStyle='#ffe44d';
+  x.beginPath();x.arc(0,-21,6,0.2,Math.PI-0.2);x.fill();
+
+  x.save();
+  x.translate(-23,-31);
+  x.rotate(throwAnimT>0?-0.45+Math.sin(p*Math.PI)*0.35:-0.22-swing*0.18);
+  x.fillStyle=shCol;x.strokeStyle='#2b1b0e';x.lineWidth=3;
+  x.beginPath();x.roundRect(-7,0,13,24,6.5);x.fill();x.stroke();
+  x.fillStyle='#ffcf9e';
+  x.beginPath();x.roundRect(-6,18,11,13,5.5);x.fill();x.stroke();
+  x.restore();
+
+  x.save();
+  x.translate(23,-31);
+  x.rotate(armPitch);
+  x.fillStyle=shCol;x.strokeStyle='#2b1b0e';x.lineWidth=3;
+  x.beginPath();x.roundRect(-6,0,13,24,6.5);x.fill();x.stroke();
+  x.fillStyle='#ffcf9e';
+  x.beginPath();x.roundRect(-5,18,11,14,5.5);x.fill();x.stroke();
+  if(throwAnimT<=0||p>0.65){
+    x.save();x.translate(1,31);x.rotate(-0.35);
+    x.fillStyle='#ffd93b';x.strokeStyle='#2b1b0e';x.lineWidth=2.2;
+    x.beginPath();x.moveTo(-10,-3);x.quadraticCurveTo(0,11,11,-4);x.quadraticCurveTo(1,3,-10,-3);x.fill();x.stroke();
+    x.restore();
+  }
+  x.restore();
+
+  x.fillStyle='#f3b882';x.strokeStyle='#2b1b0e';x.lineWidth=2.5;
+  x.beginPath();x.roundRect(-6,-46,12,9,4);x.fill();x.stroke();
+
+  x.save();
+  x.translate(0,-66);
+  x.rotate(-bodyTilt*0.6);
+
+  for(const side of [-1,1]){
+    E(side*22,2,6,7.5,'#ffcf9e');
+    x.strokeStyle='#d69562';x.lineWidth=2;
+    x.beginPath();x.arc(side*21,2,3,0,Math.PI);x.stroke();
+  }
+
+  x.fillStyle='#ffcf9e';x.strokeStyle='#2b1b0e';x.lineWidth=3;
+  x.beginPath();x.roundRect(-22,-21,44,40,19);x.fill();x.stroke();
+
+  x.fillStyle='rgba(255,112,112,0.38)';
+  x.beginPath();x.ellipse(-13,6,5.5,3,0,0,Math.PI*2);x.ellipse(13,6,5.5,3,0,0,Math.PI*2);x.fill();
+
+  const blink=(tm%4.2)>4.06;
+  for(const side of [-1,1]){
+    const ex=side*9,ey=-2;
+    if(blink){
+      x.strokeStyle='#2b1b0e';x.lineWidth=3;
+      x.beginPath();x.moveTo(ex-5,ey);x.lineTo(ex+5,ey);x.stroke();
+    }else{
+      x.fillStyle='#ffffff';x.strokeStyle='#2b1b0e';x.lineWidth=2.2;
+      x.beginPath();x.ellipse(ex,ey,6,7,0,0,Math.PI*2);x.fill();x.stroke();
+      x.fillStyle='#3b2314';
+      x.beginPath();x.arc(ex,ey-1.5,3.5,0,Math.PI*2);x.fill();
+      x.fillStyle='#ffffff';
+      x.beginPath();x.arc(ex-1.4,ey-3,1.5,0,Math.PI*2);x.fill();
+    }
+    x.strokeStyle='#2b1b0e';x.lineWidth=2.8;x.lineCap='round';
+    x.beginPath();
+    if(isThrowing){
+      x.moveTo(ex-5*side,ey-10);x.lineTo(ex+4*side,ey-7);
+    }else{
+      x.moveTo(ex-5,ey-9);x.quadraticCurveTo(ex,ey-11,ex+5,ey-9);
+    }
+    x.stroke();
+  }
+
+  x.strokeStyle='#c98452';x.lineWidth=2.2;
+  x.beginPath();x.arc(0,3,2.5,0.2,Math.PI-0.2);x.stroke();
+
+  if(throwAnimT>0&&p>=0.32&&p<=0.72){
+    x.fillStyle='#b83232';x.strokeStyle='#2b1b0e';x.lineWidth=2.2;
+    x.beginPath();x.ellipse(0,10,5.5,4.5,0,0,Math.PI*2);x.fill();x.stroke();
+    x.fillStyle='#ff8585';
+    x.beginPath();x.arc(0,12,3,Math.PI,0);x.fill();
+  }else{
+    x.strokeStyle='#2b1b0e';x.lineWidth=2.6;x.lineCap='round';
+    x.beginPath();x.arc(0,8,7,0.18*Math.PI,0.82*Math.PI);x.stroke();
+  }
+
+  if(hair){
+    x.fillStyle=hair.color;x.strokeStyle='#2b1b0e';x.lineWidth=2.8;x.lineJoin='round';
+    x.beginPath();
+    x.moveTo(-22,-6);
+    x.quadraticCurveTo(-24,-25,0,-26);
+    x.quadraticCurveTo(24,-25,22,-6);
+    x.lineTo(17,-12);x.lineTo(10,-19);x.lineTo(2,-11);x.lineTo(-6,-20);x.lineTo(-14,-11);
+    x.closePath();x.fill();x.stroke();
+    x.beginPath();x.moveTo(-4,-25);x.quadraticCurveTo(2,-35,10,-28);x.quadraticCurveTo(4,-24,2,-24);x.fill();x.stroke();
+  }
+
+  if(hat){
+    x.fillStyle=hat.color;x.strokeStyle='#2b1b0e';x.lineWidth=2.8;
+    x.beginPath();x.roundRect(-23,-26,46,10,5);x.fill();x.stroke();
+    x.beginPath();x.roundRect(-15,-39,30,15,7);x.fill();x.stroke();
+    x.fillStyle='rgba(255,255,255,0.3)';
+    x.beginPath();x.roundRect(-10,-36,20,4,2);x.fill();
+  }
+
+  if(acc){
+    x.strokeStyle=acc.color;x.lineWidth=3.2;
+    if(acc.index%3===1){
+      x.fillStyle='rgba(255,255,255,0.28)';
+      x.beginPath();x.roundRect(-15,-7,12,9,3);x.fill();x.stroke();
+      x.beginPath();x.roundRect(3,-7,12,9,3);x.fill();x.stroke();
+      x.beginPath();x.moveTo(-3,-3);x.lineTo(3,-3);x.stroke();
+    }else{
+      x.fillStyle=acc.color;x.strokeStyle='#2b1b0e';x.lineWidth=2.5;
+      x.beginPath();x.roundRect(-16,16,32,8,4);x.fill();x.stroke();
+    }
+  }
+
+  x.restore();
+  x.restore();
+  x.restore();
+}
+
+function dg(g){
+  const q=P(g),Q=GT[g.k],r=Q.r*q.s,atk=g.state==='attack',def=g.state==='defeated',hurt=g.state==='hurt';
+  const walk=Math.sin(g.anim||0),pound=atk?Math.sin((g.anim||0)*1.8):0;
+  x.save();x.translate(q.x,q.y);
+  if(def){x.globalAlpha=Math.max(0,g.fade/.72);x.translate(0,(1-g.fade/.72)*18);x.rotate((1-g.fade/.72)*.42);}
+  else if(hurt)x.translate((Math.random()-.5)*6,0);
+  else x.translate(0,atk?-Math.abs(pound)*r*.14:-Math.abs(walk)*r*.08);
+
+  E(0,r*.88,r*.85,r*.24,'rgba(0,0,0,.24)');
+  if(Q.au){x.fillStyle=Q.au;x.beginPath();x.arc(0,0,r*1.25,0,7);x.fill();}
+  if(g.freeze>0){x.fillStyle='rgba(145,230,255,.38)';x.beginPath();x.arc(0,0,r*1.12,0,7);x.fill();}
+
+  for(const i of[-1,1]){
+    const ly=atk?r*.55:r*.55+(i<0?walk:-walk)*r*.14;
+    E(i*r*.44,ly,r*.26,r*.32,Q.c);
+    x.save();
+    x.translate(i*r*.88,atk?-r*.12+pound*r*.28:r*.04+(i<0?-walk:walk)*r*.18);
+    x.rotate(atk?i*(.7+pound*.45):i*(.3+walk*.2));
+    E(0,0,r*.26,r*.46,Q.c);
+    E(0,-r*.22,r*.22,r*.2,Q.c);
+    E(0,r*.36,r*.24,r*.19,'#d9a77c');
+    x.restore();
+  }
+
+  E(0,r*.1,r*.82,r*.68,Q.c);
+  E(0,r*.16,r*.52,r*.45,'#d9a77c');
+  x.strokeStyle='#b88256';x.lineWidth=2.5*q.s;
+  x.beginPath();x.moveTo(0,-r*.15);x.lineTo(0,r*.35);
+  x.moveTo(-r*.32,r*.08);x.quadraticCurveTo(-r*.16,r*.16,0,r*.08);
+  x.moveTo(r*.32,r*.08);x.quadraticCurveTo(r*.16,r*.16,0,r*.08);
+  x.stroke();
+
+  for(const i of[-1,1])E(i*r*.56,-r*.52,r*.16,r*.18,'#d9a77c');
+  E(0,-r*.52,r*.6,r*.5,Q.c);
+  x.fillStyle=Q.c;x.strokeStyle='#2b1b0e';x.lineWidth=3;
+  x.beginPath();x.moveTo(-r*.22,-r*.92);x.lineTo(0,-r*1.12);x.lineTo(r*.22,-r*.92);x.closePath();x.fill();x.stroke();
+
+  if(Q.bs){
+    x.fillStyle='#ffd93b';x.strokeStyle='#2b1b0e';x.lineWidth=3;
+    x.beginPath();x.moveTo(-r*.42,-r*.88);x.lineTo(-r*.22,-r*1.3);x.lineTo(0,-r*.98);x.lineTo(r*.22,-r*1.3);x.lineTo(r*.42,-r*.88);x.closePath();x.fill();x.stroke();
+  }
+
+  E(0,-r*.36,r*.42,r*.28,'#d9a77c');
+  x.fillStyle='#5c3a21';
+  x.beginPath();x.arc(-r*.08,-r*.44,r*.04,0,7);x.arc(r*.08,-r*.44,r*.04,0,7);x.fill();
+
+  if(g.k==='c')E(0,-r*.6,r*.23,r*.21,'#fff');
+  else for(const i of[-1,1])E(i*r*.21,-r*.62,r*.14,r*.15,'#fff');
+  x.fillStyle='#2b1b0e';
+  if(g.k==='c'){x.beginPath();x.arc(0,-r*.6,r*.095,0,7);x.fill();}
+  else{x.beginPath();x.arc(-r*.21,-r*.62,r*.065,0,7);x.arc(r*.21,-r*.62,r*.065,0,7);x.fill();}
+
+  x.strokeStyle='#2b1b0e';x.lineWidth=4*q.s;x.lineCap='round';
+  x.beginPath();x.moveTo(-r*.38,-r*.76);x.lineTo(-r*.06,-r*.67);x.moveTo(r*.38,-r*.76);x.lineTo(r*.06,-r*.67);x.stroke();
+
+  x.fillStyle='#6e1d1d';x.strokeStyle='#2b1b0e';x.lineWidth=2.5*q.s;
+  x.beginPath();x.ellipse(0,-r*.28,r*.22,r*.1,0,0,Math.PI*2);x.fill();x.stroke();
+  x.fillStyle='#fff';
+  x.beginPath();
+  x.moveTo(-r*.14,-r*.34);x.lineTo(-r*.1,-r*.25);x.lineTo(-r*.06,-r*.34);
+  x.moveTo(r*.14,-r*.34);x.lineTo(r*.1,-r*.25);x.lineTo(r*.06,-r*.34);
+  x.fill();
+
+  if(g.sh>0){E(r*.7,r*.1,r*.32,r*.44,'#b8d0e0');TX(g.sh,r*.7,r*.2,20*q.s);}
+  if(g.hp<g.mh&&!def){
+    x.fillStyle='#2b1b0e';x.beginPath();x.roundRect(-r*.62,-r*1.22,r*1.24,11*q.s,5);x.fill();
+    x.fillStyle='#8fd13f';x.beginPath();x.roundRect(-r*.62+2,-r*1.22+2,(r*1.24-4)*Math.max(0,g.hp)/g.mh,11*q.s-4,4);x.fill();
+  }
+  x.restore();
+}
+
+function drawDetailedTree(tx,ty,sc,foliage1,foliage2,trunk='#7a4928'){
+  x.save();x.translate(tx,ty);x.scale(sc,sc);
+  x.fillStyle='rgba(25,55,15,0.22)';
+  x.beginPath();x.ellipse(0,28,36,10,0,0,Math.PI*2);x.fill();
+  x.fillStyle=trunk;x.strokeStyle='#2b1b0e';x.lineWidth=3;
+  x.beginPath();
+  x.moveTo(-14,26);x.quadraticCurveTo(-9,0,-8,-22);
+  x.lineTo(8,-22);x.quadraticCurveTo(9,0,14,26);
+  x.closePath();x.fill();x.stroke();
+  E(-22,-24,24,20,foliage1);
+  E(22,-24,24,20,foliage1);
+  E(0,-42,30,25,foliage2);
+  x.fillStyle='rgba(255,255,255,0.22)';
+  x.beginPath();x.ellipse(-8,-48,12,6,-0.3,0,Math.PI*2);x.fill();
+  E(-12,-28,4,4,'#ff6b4a');
+  E(14,-34,4,4,'#ffd93b');
+  x.restore();
+}
+
+function drawCloud(cx,cy,sc){
+  x.save();x.translate(cx,cy);x.scale(sc,sc);
+  x.fillStyle='rgba(255,255,255,0.88)';
+  x.beginPath();
+  x.arc(-22,4,16,0,Math.PI*2);
+  x.arc(0,-4,22,0,Math.PI*2);
+  x.arc(24,4,17,0,Math.PI*2);
+  x.arc(6,10,18,0,Math.PI*2);
+  x.fill();
+  x.restore();
+}
+
+function drawWorldBackground(){
+  if(currentWorld==='lava'){
+    const g=x.createLinearGradient(0,0,0,H);
+    g.addColorStop(0,'#240814');g.addColorStop(.3,'#8a2216');g.addColorStop(1,'#3d1410');
+    x.fillStyle=g;x.fillRect(0,0,W,H);
+
+    x.fillStyle='#ff9b26';x.beginPath();x.arc(370,108,42,0,7);x.fill();
+    x.fillStyle='rgba(255,190,80,0.25)';x.beginPath();x.arc(370,108,58,0,7);x.fill();
+
+    x.fillStyle='#3b1816';x.strokeStyle='#210b0a';x.lineWidth=3;
+    x.beginPath();x.moveTo(-10,225);x.lineTo(115,120);x.lineTo(145,120);x.lineTo(255,225);x.closePath();x.fill();x.stroke();
+    x.beginPath();x.moveTo(225,225);x.lineTo(355,112);x.lineTo(395,112);x.lineTo(490,225);x.closePath();x.fill();x.stroke();
+    x.fillStyle='#ff6a1f';
+    x.beginPath();x.moveTo(118,122);x.lineTo(142,122);x.lineTo(155,175);x.lineTo(130,160);x.lineTo(108,180);x.closePath();x.fill();
+    x.beginPath();x.moveTo(358,114);x.lineTo(392,114);x.lineTo(405,172);x.lineTo(375,155);x.lineTo(345,178);x.closePath();x.fill();
+
+    x.fillStyle='#ff6a1f';x.beginPath();x.moveTo(182,220);x.lineTo(298,220);x.lineTo(480,800);x.lineTo(0,800);x.closePath();x.fill();
+    x.fillStyle='#4f2522';x.beginPath();x.moveTo(194,220);x.lineTo(286,220);x.lineTo(455,800);x.lineTo(25,800);x.closePath();x.fill();
+
+    for(const [rx,ry,sc] of [[48,310,.8],[430,330,.85],[38,480,1.05],[442,510,1],[55,650,.9],[425,660,.95]]){
+      E(rx,ry,22*sc,14*sc,'#2c161c');
+      x.fillStyle='#ff7a29';x.beginPath();x.arc(rx-4*sc,ry-3*sc,4*sc,0,7);x.fill();
+    }
+    for(let i=0;i<14;i++){
+      const sy=780-((tm*55+i*62)%600);
+      const sx=30+(i*83)%420+Math.sin(tm*3+i)*12;
+      x.fillStyle=i%2?'#ffd93b':'#ff6a1f';
+      x.beginPath();x.arc(sx,sy,2.5,0,7);x.fill();
+    }
+
+  }else if(currentWorld==='snow'){
+    const g=x.createLinearGradient(0,0,0,H);
+    g.addColorStop(0,'#57b1e6');g.addColorStop(.3,'#d4f2ff');g.addColorStop(1,'#eefaff');
+    x.fillStyle=g;x.fillRect(0,0,W,H);
+
+    drawCloud((tm*12+90)%540-30,72,.85);
+    drawCloud((tm*9+310)%540-30,105,.7);
+
+    x.fillStyle='#a8d8f0';x.beginPath();x.moveTo(0,220);x.lineTo(120,115);x.lineTo(240,220);x.closePath();x.fill();
+    x.fillStyle='#ffffff';x.beginPath();x.moveTo(120,115);x.lineTo(75,160);x.lineTo(105,152);x.lineTo(120,168);x.lineTo(148,155);x.closePath();x.fill();
+    x.fillStyle='#93cae8';x.beginPath();x.moveTo(210,220);x.lineTo(355,108);x.lineTo(480,220);x.closePath();x.fill();
+    x.fillStyle='#ffffff';x.beginPath();x.moveTo(355,108);x.lineTo(305,155);x.lineTo(340,148);x.lineTo(360,164);x.lineTo(395,150);x.closePath();x.fill();
+
+    x.fillStyle='#9bd9f5';x.beginPath();x.moveTo(184,220);x.lineTo(296,220);x.lineTo(478,800);x.lineTo(2,800);x.closePath();x.fill();
+    x.fillStyle='#d9f4ff';x.beginPath();x.moveTo(194,220);x.lineTo(286,220);x.lineTo(458,800);x.lineTo(22,800);x.closePath();x.fill();
+
+    for(const [tx,ty,sc] of [[52,250,.75],[428,255,.78],[42,400,.92],[438,415,.95],[48,570,1.05],[432,580,1.05]]){
+      drawDetailedTree(tx,ty,sc,'#3b8c88','#c9f2ff','#5e3c24');
+    }
+    x.fillStyle='rgba(255,255,255,0.85)';
+    for(let i=0;i<18;i++){
+      const ny=(tm*45+i*47)%790;
+      const nx=(i*67+Math.sin(tm*2+i)*18)%480;
+      x.beginPath();x.arc(nx,ny,2.8,0,7);x.fill();
+    }
+
+  }else if(currentWorld==='space'){
+    const g=x.createLinearGradient(0,0,0,H);
+    g.addColorStop(0,'#07091c');g.addColorStop(.45,'#1b1545');g.addColorStop(1,'#120e2b');
+    x.fillStyle=g;x.fillRect(0,0,W,H);
+
+    const neb=x.createRadialGradient(140,120,10,140,120,140);
+    neb.addColorStop(0,'rgba(155,95,255,0.28)');neb.addColorStop(1,'rgba(0,0,0,0)');
+    x.fillStyle=neb;x.fillRect(0,0,W,300);
+
+    for(let i=0;i<32;i++){
+      const tw=0.5+0.5*Math.sin(tm*3+i);
+      x.fillStyle=i%3===0?`rgba(255,230,130,${tw})`:`rgba(255,255,255,${tw})`;
+      x.beginPath();x.arc((i*73)%468,(i*47)%280,i%4===0?2.5:1.6,0,7);x.fill();
+    }
+    E(375,110,34,34,'#9d7ae8');
+    x.strokeStyle='#ffd93b';x.lineWidth=4;
+    x.beginPath();x.ellipse(375,110,56,12,-0.25,0,Math.PI*2);x.stroke();
+
+    x.fillStyle='#5c4bb8';x.beginPath();x.moveTo(184,220);x.lineTo(296,220);x.lineTo(478,800);x.lineTo(2,800);x.closePath();x.fill();
+    x.fillStyle='#282159';x.beginPath();x.moveTo(194,220);x.lineTo(286,220);x.lineTo(458,800);x.lineTo(22,800);x.closePath();x.fill();
+
+    for(const [cx,cy,sc] of [[46,320,.85],[434,340,.9],[40,510,1],[440,525,1]]){
+      x.save();x.translate(cx,cy);x.scale(sc,sc);
+      x.fillStyle='#72e5ff';x.strokeStyle='#2b1b0e';x.lineWidth=2.5;
+      x.beginPath();x.moveTo(0,-24);x.lineTo(14,0);x.lineTo(0,22);x.lineTo(-14,0);x.closePath();x.fill();x.stroke();
+      x.restore();
+    }
+
+  }else{
+    const g=x.createLinearGradient(0,0,0,H);
+    g.addColorStop(0,'#63ccff');
+    g.addColorStop(.27,'#d7f6ff');
+    g.addColorStop(.27,'#88e051');
+    g.addColorStop(1,'#47b032');
+    x.fillStyle=g;x.fillRect(0,0,W,H);
+
+    x.fillStyle='rgba(255,235,105,0.28)';x.beginPath();x.arc(395,86,62,0,7);x.fill();
+    x.fillStyle='#ffe869';x.strokeStyle='#e8a800';x.lineWidth=3;
+    x.beginPath();x.arc(395,86,38,0,7);x.fill();x.stroke();
+
+    drawCloud((tm*14+60)%560-40,68,.85);
+    drawCloud((tm*10+260)%560-40,108,.68);
+
+    x.fillStyle='#68cf46';
+    x.beginPath();x.ellipse(110,218,170,42,0,Math.PI,0);x.fill();
+    x.fillStyle='#59bf3b';
+    x.beginPath();x.ellipse(360,218,190,48,0,Math.PI,0);x.fill();
+
+    for(let i=0;i<7;i++){
+      drawDetailedTree(28+i*72,196,.62,'#349630','#4ec244');
+    }
+
+    x.fillStyle='#c99e57';
+    x.beginPath();x.moveTo(182,216);x.lineTo(298,216);x.lineTo(480,800);x.lineTo(0,800);x.closePath();x.fill();
+    x.fillStyle='#ebd096';
+    x.beginPath();x.moveTo(194,216);x.lineTo(286,216);x.lineTo(456,800);x.lineTo(24,800);x.closePath();x.fill();
+
+    x.fillStyle='rgba(166,124,68,0.42)';
+    for(const [px,py,rx,ry] of [[230,270,10,5],[255,340,14,6],[215,430,16,7],[270,515,18,8],[225,600,20,8]]){
+      x.beginPath();x.ellipse(px,py,rx,ry,0,0,7);x.fill();
+    }
+
+    drawDetailedTree(46,275,.82,'#359930','#55cc49');
+    drawDetailedTree(434,282,.85,'#359930','#55cc49');
+    drawDetailedTree(38,435,.98,'#2f8c2b','#4ec443');
+    drawDetailedTree(442,448,1.02,'#2f8c2b','#4ec443');
+    drawDetailedTree(42,610,1.12,'#2b8027','#48ba3d');
+    drawDetailedTree(438,618,1.14,'#2b8027','#48ba3d');
+
+    for(const [fx,fy,col] of [[78,350,'#ff6b8b'],[395,365,'#ffd93b'],[68,525,'#ffffff'],[405,535,'#ff8a3d'],[84,685,'#ffd93b'],[392,695,'#ff6b8b']]){
+      E(fx,fy,16,10,'#3ca836');
+      x.fillStyle=col;
+      x.beginPath();x.arc(fx-5,fy-3,3.5,0,7);x.arc(fx+6,fy-1,3.5,0,7);x.fill();
+    }
+  }
+}
+
+function dr(){
+  x.save();
+  if(shk>0)x.translate((Math.random()-.5)*14*shk,(Math.random()-.5)*14*shk);
+  drawWorldBackground();
+  if(bh>0){
+    for(let i=0;i<7;i++){x.fillStyle='#b8743b';x.strokeStyle='#2b1b0e';x.lineWidth=3;x.fillRect(35+i*60,620,54,32);x.strokeRect(35+i*60,620,54,32);}
+    TX('🛡️ BARRICADA: '+bh+'/'+bhMax(),240,612,21,'#ffd93b');
+  }
+  for(const g of[...gs].sort((a,b)=>a.p-b.p))dg(g);
+  for(const b of bm){
+    const s=SK[S.ks];x.save();x.translate(b.x,b.y);x.rotate(tm*16);x.scale(siz(),siz());
+    const c=WP[b.w].c||(s[1]=='R'?'hsl('+(tm*360%360)+',95%,60%)':s[1]);
+    x.beginPath();x.moveTo(-20,-8);x.quadraticCurveTo(0,22,22,-10);x.quadraticCurveTo(2,8,-20,-8);
+    x.fillStyle=c;x.fill();x.lineWidth=3;x.strokeStyle='#2b1b0e';x.stroke();x.restore();
+  }
+  for(const f of fx){x.globalAlpha=Math.max(0,1-f.t);TX(f.s,f.x,f.y-f.t*45,26,'#ffd93b');x.globalAlpha=1;}
+  for(const p of powerFX){
+    const k=Math.max(0,1-p.t/.85);x.save();x.globalAlpha=k;
+    x.strokeStyle=p.kind==='nova'?'#ffd93b':(p.kind==='pinata'?'#ff7eb6':'#ffe55c');
+    x.lineWidth=10*k;x.beginPath();x.arc(p.tx,p.ty,(1-k)*190+24,0,7);x.stroke();x.restore();
+  }
+  const swing=throwAnimT>0?Math.sin(throwAnimT*9)*0.3:Math.sin(tm*2.8)*0.08;
+  drawAvatar(240,758,1.18,swing);
+  if(st!='menu'){
+    TX('OLEADA '+wave,14,37,23,'#fff','left');
+    TX(WORLDS[currentWorld].label,236,36,18,WORLDS[currentWorld].color,'center');
+    TX('🍌 '+S.b,392,37,20,'#ffd93b','right');
+    x.fillStyle='#ffd93b';x.strokeStyle='#2b1b0e';x.lineWidth=3;
+    x.beginPath();x.roundRect(402,12,66,32,10);x.fill();x.stroke();
+    TX('MENÚ',435,34,17,'#2b1b0e','center');
+    TX('❤️'.repeat(Math.max(0,lives)),240,70,22);
+    if(st==='play'){
+      const pw=POWERUPS[S.ws];
+      const ok=pw&&S.b>=pw.cost;
+      x.fillStyle=pw?(ok?'#ff8a3d':'#6d5a46'):'#52473b';
+      x.strokeStyle='#2b1b0e';x.lineWidth=3;
+      x.beginPath();x.roundRect(96,88,288,46,14);x.fill();x.stroke();
+      TX(pw?('⚡ '+pw.name+' ('+pw.cost+'🍌)'):'⚡ ESPECIAL (EQUIPA CLÁSICA/PIÑATA/COLOSAL)',240,117,pw?17:13,pw?'#fff':'#e7d9b8');
+    }
+  }
+  x.restore();
+}
+
+/* --- INTERFAZ DE USUARIO: PÁGINAS, GUÍA, NOTICIAS Y TIENDA --- */
+function start(){
+  if(st==='menu'&&S.run&&S.run.active&&restoreRun()){ui();return;}
+  if(st==='menu'&&S.shop&&S.shop.wave&&restoreRun()){ui();return;}
+  userTouched=true;S.run=null;S.shop=null;
+  lives=mx();wave=0;currentWorld='park';gs=[];bm=[];fx=[];bh=0;nw();st='play';sv();ui();
+}
+
+function renderTopNav(){
+  const navItems=[
+    ['home','🏠','Inicio'],
+    ['guide','📘','Guía'],
+    ['news','📰','Noticias'],
+    ['shop','🛒','Tienda'],
+    ['legal','⚖️','Legal']
+  ];
+  return `<div class="topNav">${navItems.map(([id,ico,lbl])=>
+    `<button class="${(PAGE===id||(id==='legal'&&PAGE==='contact'))?'active':''}" onclick="PAGE='${id}';ui()"><span>${ico}</span><span>${lbl}</span></button>`
+  ).join('')}</div>`;
+}
+
+function renderFooter(){
+  return `<div class="siteFooter">
+    <div><strong>${SITE_META.domain}</strong> • Operado por <strong>${SITE_META.ownerName}</strong> (${SITE_META.ownerAgeStatus})</div>
+    <div style="margin-top:4px">
+      <button class="inlineLink" onclick="PAGE='legal';LEGAL_TAB='privacy';ui()">Política de Privacidad</button> •
+      <button class="inlineLink" onclick="PAGE='legal';LEGAL_TAB='terms';ui()">Términos de Uso</button> •
+      <button class="inlineLink" onclick="PAGE='legal';LEGAL_TAB='storage';ui()">localStorage / IndexedDB</button> •
+      <button class="inlineLink" onclick="PAGE='contact';ui()">Contacto y Titularidad</button>
+    </div>
+  </div>`;
+}
+
+function renderHomePage(){
+  const hasSavedRun=(S.run&&S.run.active)||(S.shop&&S.shop.wave);
+  const resumeLabel=S.run&&S.run.active
+    ?`▶ CONTINUAR (OLEADA ${S.run.wave})`
+    :(S.shop&&S.shop.wave?`▶ REANUDAR TIENDA (OLEADA ${S.shop.wave})`:'▶ ¡JUGAR AHORA!');
+
+  return `
+    <div class="heroBanner">
+      <div class="badge">EDICIÓN ARCADE • 4 MUNDOS • 26 ARMAS</div>
+      <h1>🍌 BANANA THROW</h1>
+      <p style="font-weight:800;margin:4px 0 8px">Defiende el valle lanzando bananas bumerán con trayectoria curva antes de que los gorilas derriben tu barricada.</p>
+      <div class="illusBox">${svgIllustration('hero')}</div>
+      <button class="go" onclick="start()">${resumeLabel}</button>
+      ${hasSavedRun?`<button style="width:100%;margin-top:4px;background:#fff3c4" onclick="S.run=null;S.shop=null;sv();start()">🔄 Empezar Nueva Partida</button>`:''}
+    </div>
+
+    <div class="statGrid">
+      <div class="statBox"><strong>🍌 ${S.b}</strong><span>Bananas</span></div>
+      <div class="statBox"><strong>🏆 ${S.best}</strong><span>Récord Oleada</span></div>
+      <div class="statBox"><strong>⚔️ ${dmg()}</strong><span>Daño Actual</span></div>
+    </div>
+
+    <div class="card">
+      <h3>🎯 ¿De qué trata el juego?</h3>
+      <p><strong>Banana Throw</strong> es un juego de defensa arcade y puntería parabólica. Toca o haz clic en cualquier punto del campo para lanzar una banana que describe un <strong>bucle de ida y vuelta</strong>: ¡puedes golpear al mismo gorila al ir y al regresar!</p>
+      <div class="tagRow">
+        <span class="tag">🎯 Doble golpe por curva</span>
+        <span class="tag">🛡️ Barricadas desplegables</span>
+        <span class="tag">👑 Jefes cada 5 oleadas</span>
+        <span class="tag">👕 126 piezas de Avatar</span>
+      </div>
+    </div>
+
+    <div class="card" style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+      <div>
+        <strong style="font-size:.95em">📢 Última Novedad: ${NEWS_UPDATES[0].ver}</strong>
+        <p style="font-size:.82em;margin:2px 0 0">${NEWS_UPDATES[0].title}</p>
+      </div>
+      <button onclick="PAGE='news';ui()">Ver más</button>
+    </div>
+
+    <div class="tb">
+      <button onclick="PAGE='guide';GUIDE_TAB='weapons';ui()">🍌 Ver Arsenal</button>
+      <button onclick="PAGE='guide';GUIDE_TAB='worlds';ui()">🌍 Ver Mundos</button>
+      <button onclick="PAGE='shop';T='a';ui()">🧢 Mi Avatar</button>
+    </div>
+
+    <div class="cred">
+      <strong>🔒 Respaldo de Progreso y Privacidad</strong><br>
+      Estado de almacenamiento persistente: <strong>${storageConsent?'Activado (localStorage + IndexedDB)':'Solo sesión actual (window.name)'}</strong>.<br>
+      <div style="margin-top:6px;display:flex;justify-content:center;gap:6px;flex-wrap:wrap">
+        <button onclick="exportSave()">💾 Exportar JSON</button>
+        <button onclick="document.getElementById('saveFile').click()">📂 Importar JSON</button>
+        <button onclick="toggleTheme()">🌓 Tema</button>
+        <button onclick="PAGE='legal';LEGAL_TAB='privacy';ui()">🔐 Privacidad</button>
+        <button onclick="PAGE='contact';ui()">✉️ Contacto</button>
+      </div>
+    </div>
+    ${renderFooter()}
+  `;
+}
+
+function renderGuidePage(){
+  const tabs=[
+    ['mechanics','⚙️ Mecánicas'],
+    ['weapons','🍌 Armas ('+WP.length+')'],
+    ['worlds','🌍 Mundos'],
+    ['enemies','🦍 Bestiario']
+  ];
+  let body='';
+
+  if(GUIDE_TAB==='mechanics'){
+    body=`
+      <div class="card">
+        <h3>1. Trayectoria Bumerán</h3>
+        <p>Al tocar la pantalla, la banana viaja hacia el punto marcado trazando una elipse y regresa a tus manos. Apunta ligeramente <strong>detrás del objetivo</strong> para impactarlo tanto en la ida como en el retorno.</p>
+      </div>
+      <div class="card">
+        <h3>2. Efectos Elementales y de Estado</h3>
+        <p>• <strong>Área (💣/🎉):</strong> Explotan al llegar al punto más lejano o al chocar.<br>
+        • <strong>Control (❄️/🌀):</strong> Congelan o arrastran hacia atrás a los enemigos.<br>
+        • <strong>Cadena (⚡):</strong> Saltan entre múltiples objetivos cercanos.<br>
+        • <strong>Estado (🔥/🩸/☠️):</strong> Siguen restando vida cada fracción de segundo.</p>
+      </div>
+      <div class="card">
+        <h3>3. Poderes Especiales Activos</h3>
+        <p>Al equipar la <strong>Banana Clásica</strong>, la <strong>Piñata Festiva</strong> o la <strong>Banana Colosal</strong>, aparece un botón dorado en la parte superior de la arena para desatar un ataque especial a cambio de bananas.</p>
+      </div>
+      <div class="card">
+        <h3>4. Barricadas y Jefes</h3>
+        <p>Compra barricadas en la tienda; se despliegan automáticamente al iniciar cada oleada y detienen a los enemigos normales, aunque los <strong>Jefes de Bioma</strong> pueden atravesarlas con su peso.</p>
+      </div>
+    `;
+  }else if(GUIDE_TAB==='weapons'){
+    body=`<p style="font-size:.82em;font-weight:800">Explora las ${WP.length} armas originales disponibles en la armería:</p>`+
+      WP.map((w)=>`
+        <div class="guideCard">
+          ${svgIllustration.weaponCat(w.cat)}
+          <div style="flex:1">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <strong style="font-size:.98em">${w.n}</strong>
+              <span class="tag">${w.cat}</span>
+            </div>
+            <p style="font-size:.82em;margin:3px 0">${w.t}</p>
+            <div class="tagRow">
+              <span class="tag">⚔️ Daño: ${w.d}</span>
+              <span class="tag">⚡ Vel: ${Math.round(w.s*100)}%</span>
+              <span class="tag">🔱 Tiros: ${w.m}</span>
+              <span class="tag">🍌 ${w.p===0?'Inicial':w.p}</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+  }else if(GUIDE_TAB==='worlds'){
+    body=`<p style="font-size:.82em;font-weight:800">Cada 10 oleadas viajas a un nuevo ecosistema con reglas y jefes propios:</p>`+
+      WORLD_BASE.map(key=>{
+        const w=WORLDS[key];
+        return `
+          <div class="guideCard">
+            <div class="guideArt">${svgIllustration(key)}</div>
+            <div style="flex:1">
+              <strong style="font-size:1em;color:${w.color};text-shadow:0 1px 0 #2b1b0e">${w.label}</strong>
+              <p style="font-size:.82em;margin:3px 0">${w.desc}</p>
+              <div class="tagRow">
+                <span class="tag">🌊 ${w.waves}</span>
+                <span class="tag">👑 Jefe: ${w.boss}</span>
+                <span class="tag">❤️ Salud x${w.hp}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+  }else if(GUIDE_TAB==='enemies'){
+    const featured=['n','r','t','e','s','k','f','m','i','q','u','o','d','l','g','p'];
+    body=`<p style="font-size:.82em;font-weight:800">Principales adversarios y comandantes que enfrentarás:</p>`+
+      featured.map(k=>{
+        const g=GT[k];
+        return `
+          <div class="it">
+            <div>
+              <b>${g.bs?'👑 ':''}${g.m}</b>
+              <small>${g.d}</small>
+              <div class="tagRow">
+                <span class="tag">❤️ Base: ${g.h}</span>
+                <span class="tag">🍌 Recompensa: +${g.o}</span>
+                ${g.sh?`<span class="tag">🛡️ Escudo: ${g.sh}</span>`:''}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+  }
+
+  return `
+    <h2>📘 GUÍA DE JUEGO Y ARSENAL</h2>
+    <div class="tb">${tabs.map(([id,lbl])=>
+      `<button class="${GUIDE_TAB===id?'on':''}" onclick="GUIDE_TAB='${id}';ui()">${lbl}</button>`
+    ).join('')}</div>
+    ${body}
+  `;
+}
+
+function renderNewsPage(){
+  return `
+    <h2>📰 NOTICIAS Y ACTUALIZACIONES</h2>
+    <p style="font-size:.84em;font-weight:800">Bitácora oficial de mejoras, balance y nuevas características en ${SITE_META.domain}.</p>
+    ${NEWS_UPDATES.map(n=>`
+      <div class="newsCard">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span class="newsDate">${n.date}</span>
+          <span class="badge">${n.ver}</span>
+        </div>
+        <h3 style="margin:4px 0;font-size:1.25em">${n.title}</h3>
+        <p style="font-size:.85em">${n.body}</p>
+        <ul style="margin:6px 0 2px;padding-left:18px;font-size:.82em;line-height:1.35">
+          ${n.bullets.map(b=>`<li>${b}</li>`).join('')}
+        </ul>
+      </div>
+    `).join('')}
+    ${renderFooter()}
+  `;
+}
+
+function renderLegalPage(){
+  const tabs=[
+    ['privacy','🔐 Privacidad'],
+    ['terms','📜 Términos'],
+    ['storage','💾 Almacenamiento']
+  ];
+  let body='';
+  if(LEGAL_TAB==='privacy'){
+    body=`
+      <div class="card">
+        <h3>Política de Privacidad</h3>
+        <p><strong>Última actualización:</strong> ${SITE_META.updated}. Este sitio web y juego arcade es administrado por <strong>${SITE_META.ownerName}</strong> (${SITE_META.ownerAgeStatus}).</p>
+        <div class="legalBox">
+          <strong>1. Datos que se almacenan:</strong> No requerimos registro de cuenta, nombre real ni contraseñas para jugar. El progreso de partida (bananas acumuladas, mejoras, armas, personalización de avatar, récord de oleada y estado en curso) se guarda localmente en tu propio navegador.
+        </div>
+        <div class="legalBox">
+          <strong>2. Finalidad técnica:</strong> El almacenamiento local permite conservar tu avance entre sesiones, evitar pérdidas accidentales al recargar o cambiar de pestaña y permitirte exportar o importar un archivo JSON cuando lo desees.
+        </div>
+        <div class="legalBox">
+          <strong>3. Derechos y control del usuario:</strong> Tú controlas tus datos. Puedes borrar los datos del sitio desde tu navegador, exportar tu partida en JSON o desactivar la persistencia local en la pestaña <em>Almacenamiento</em>.
+        </div>
+      </div>
+    `;
+  }else if(LEGAL_TAB==='terms'){
+    body=`
+      <div class="card">
+        <h3>Términos y Condiciones de Uso</h3>
+        <div class="legalBox">
+          <strong>1. Naturaleza del servicio:</strong> Banana Throw es un juego web de entretenimiento gratuito con contenido, ilustraciones vectoriales y textos originales creados para este proyecto.
+        </div>
+        <div class="legalBox">
+          <strong>2. Uso adecuado:</strong> El jugador se compromete a utilizar el sitio de forma lícita, sin interferir con su funcionamiento ni intentar extraer o alterar indebidamente recursos protegidos.
+        </div>
+        <div class="legalBox">
+          <strong>3. Disponibilidad y respaldo:</strong> Al depender del entorno del navegador y de la memoria del dispositivo, se recomienda exportar respaldos JSON periódicos si deseas conservar partidas largas a largo plazo.
+        </div>
+      </div>
+    `;
+  }else{
+    body=`
+      <div class="card">
+        <h3>Uso de localStorage, IndexedDB y Consentimiento</h3>
+        <p>Este sitio <strong>no utiliza cookies publicitarias ni rastreadores de terceros</strong>. Para el funcionamiento del autoguardado empleamos mecanismos de almacenamiento del navegador:</p>
+        <div class="legalBox">
+          • <strong>localStorage:</strong> Guarda copias locales del progreso (<code>bt1</code>, <code>bt1_backup</code>, <code>bt1_recovery</code>) y preferencias de interfaz.<br>
+          • <strong>IndexedDB:</strong> Mantiene una base local (<code>BananaThrowSaveDB</code>) como respaldo adicional frente a cierres inesperados.<br>
+          • <strong>window.name:</strong> Conserva una copia de respaldo durante la sesión activa de la ventana o pestaña.
+        </div>
+        <p style="font-size:.84em"><strong>Preferencia de almacenamiento persistente:</strong> ${storageConsent?'Permitido (localStorage e IndexedDB activos)':'Restringido a la sesión actual'}</p>
+        <div class="tb">
+          <button class="${storageConsent?'on':''}" onclick="storageConsent=true;sv(true);ui()">✅ Permitir localStorage / IndexedDB</button>
+          <button class="${!storageConsent?'on':''}" onclick="storageConsent=false;showToast('Persistente pausado; solo sesión');ui()">⏸️ Solo sesión actual</button>
+        </div>
+      </div>
+    `;
+  }
+  return `
+    <h2>⚖️ INFORMACIÓN LEGAL Y PRIVACIDAD</h2>
+    <div class="tb">${tabs.map(([id,lbl])=>
+      `<button class="${LEGAL_TAB===id?'on':''}" onclick="LEGAL_TAB='${id}';ui()">${lbl}</button>`
+    ).join('')}
+    <button onclick="PAGE='contact';ui()">✉️ Contacto</button></div>
+    ${body}
+    ${renderFooter()}
+  `;
+}
+
+function renderContactPage(){
+  return `
+    <h2>✉️ CONTACTO Y TITULARIDAD</h2>
+    <div class="card">
+      <h3>Datos del Responsable del Sitio</h3>
+      <div class="legalBox">
+        <strong>Titular / Responsable:</strong> ${SITE_META.ownerName}<br>
+        <strong>Condición de titularidad:</strong> ${SITE_META.ownerAgeStatus}<br>
+        <strong>Sitio / Dominio:</strong> ${SITE_META.domain}<br>
+        <strong>Ubicación de referencia:</strong> ${SITE_META.location}<br>
+        <strong>Correo de contacto directo:</strong> ${SITE_META.contactEmail}
+      </div>
+      <p style="font-size:.82em">Si deseas reportar un error técnico, enviar sugerencias de equilibrio o realizar una consulta sobre privacidad y uso del sitio, puedes escribirnos directamente a <strong>${SITE_META.contactEmail}</strong> o dejar un mensaje en este formulario local:</p>
+      <form onsubmit="event.preventDefault();this.reset();showToast('Mensaje registrado para '+SITE_META.contactEmail)">
+        <label style="font-size:.8em;font-weight:900">Tu nombre o apodo</label>
+        <input class="formField" type="text" required placeholder="Ej. Jugador del Valle">
+        <label style="font-size:.8em;font-weight:900">Correo electrónico</label>
+        <input class="formField" type="email" required placeholder="tunombre@correo.com">
+        <label style="font-size:.8em;font-weight:900">Mensaje</label>
+        <textarea class="formField" rows="3" required placeholder="Cuéntanos tu consulta, sugerencia o reporte..."></textarea>
+        <button class="go" type="submit" style="font-size:1.15em">📨 ENVIAR CONSULTA</button>
+      </form>
+    </div>
+    ${renderFooter()}
+  `;
+}
+
+function renderShopContent(){
+  const headerBar=st==='shop'
+    ?`<div class="heroBanner" style="padding:8px 10px;margin-bottom:8px">
+        <div class="badge">OLEADA ${wave} SUPERADA • ${WORLDS[currentWorld].label}</div>
+        <div style="font-family:'Bangers',cursive;font-size:1.5em">🍌 BANANAS DISPONIBLES: ${S.b}</div>
+      </div>`
+    :`<div class="card" style="display:flex;justify-content:space-between;align-items:center">
+        <div><strong>🍌 Bananas: ${S.b}</strong><small style="display:block">Récord: Oleada ${S.best}</small></div>
+        <button onclick="PAGE='home';ui()">🏠 Inicio</button>
+      </div>`;
+
+  let itemsHtml='';
+  if(T==='u'){
+    itemsHtml=`<div class="it barItem">
+      <div><b>🛡️ Barricada Portátil</b> (${S.bar}/5)<small>Bloquea a los gorilas normales al iniciar oleada (aguanta ${bhMax()} golpes).</small></div>
+      <button ${S.b<40||S.bar>=5?'disabled':''} onclick="userTouched=true;S.b-=40;S.bar++;sv(true);ui()">${S.bar>=5?'MÁX':'40 🍌'}</button>
+    </div>`+
+    UP.map(([k,n,d,,m])=>{
+      const l=S.u[k],c=cost(k);
+      return `<div class="it">
+        <div><b>${n}</b> (${l}/${m})<small>${d}</small></div>
+        <button ${l>=m||S.b<c?'disabled':''} onclick="userTouched=true;S.b-=${c};S.u.${k}++;${k=='l'?'lives++;':''}sv(true);ui()">${l>=m?'MÁX':c+' 🍌'}</button>
+      </div>`;
+    }).join('');
+  }else if(T==='w'){
+    itemsHtml=WP.map((w,i)=>{
+      const o=S.w.includes(i),e=S.ws==i;
+      return `<div class="it">
+        <div><b>${w.n}</b> <span class="tag" style="font-size:.7em">${w.cat}</span><small>${w.t} (Daño ${w.d} • Tiros ${w.m})</small></div>
+        <button class="${e?'on':''}" ${!o&&S.b<w.p?'disabled':''} onclick="userTouched=true;if(!${o}){S.b-=${w.p};S.w.push(${i})}S.ws=${i};sv(true);ui()">${e?'EQUIPADA':o?'USAR':w.p+' 🍌'}</button>
+      </div>`;
+    }).join('');
+  }else if(T==='k'){
+    itemsHtml=SK.map((s,i)=>{
+      const o=S.k.includes(i),e=S.ks==i;
+      return `<div class="it">
+        <div><span class="sw" style="background:${s[1]=='R'?'linear-gradient(90deg,red,orange,yellow,green,cyan,blue,violet)':s[1]}"></span><b>${s[0]}</b><small>${s[4]}</small></div>
+        <button class="${e?'on':''}" ${!o&&S.b<s[3]?'disabled':''} onclick="userTouched=true;if(!${o}){S.b-=${s[3]};S.k.push(${i})}S.ks=${i};sv(true);ui()">${e?'EQUIPADO':o?'USAR':s[3]+' 🍌'}</button>
+      </div>`;
+    }).join('');
+  }else if(T==='a'){
+    const cat=AVATAR_CATEGORIES.find(c=>c.key===AVATAR_TAB)||AVATAR_CATEGORIES[0];
+    itemsHtml=`<div class="avTabs">${AVATAR_CATEGORIES.map(c=>
+      `<button class="${AVATAR_TAB===c.key?'on':''}" onclick="AVATAR_TAB='${c.key}';ui()">${c.label}</button>`
+    ).join('')}</div>`+
+    AVATAR_ITEMS.filter(it=>it.category===cat.key).map(it=>{
+      const owned=S.avatar.owned.includes(it.id),eq=S.avatar.equip[cat.key]===it.id;
+      const canUnequip=eq&&!AVATAR_START.includes(it.id);
+      return `<div class="it avItem">
+        <div><span class="sw" style="background:${it.color}"></span><b>${it.name}</b><small><span class="rarity" style="color:${it.rarityColor}">${it.rarity}</span> • ${cat.label}</small></div>
+        <button class="${eq?'on':''}" ${!owned&&S.b<it.price?'disabled':''} onclick="buyOrEquipAvatar('${it.id}')">${canUnequip?'QUITAR':eq?'PUESTO':owned?'USAR':it.price+' 🍌'}</button>
+      </div>`;
+    }).join('');
+  }
+
+  return `
+    ${headerBar}
+    <div class="tb">
+      <button class="${T=='u'?'on':''}" onclick="T='u';ui()">⚡ Mejoras</button>
+      <button class="${T=='w'?'on':''}" onclick="T='w';ui()">🍌 Armas</button>
+      <button class="${T=='k'?'on':''}" onclick="T='k';ui()">🎨 Aspectos</button>
+      <button class="${T=='a'?'on':''}" onclick="T='a';ui()">🧢 Avatar</button>
+    </div>
+    ${st==='shop'?`<button class="go" onclick="userTouched=true;S.shop=null;nw();st='play';sv();ui()">▶ OLEADA ${wave+1}</button>`:''}
+    ${itemsHtml}
+    ${st==='shop'?`<button class="go" onclick="userTouched=true;S.shop=null;nw();st='play';sv();ui()">▶ CONTINUAR OLEADA ${wave+1}</button>`:''}
+  `;
+}
+
+function ui(){
+  U.style.display=st=='play'?'none':'block';
+  if(st=='play')return;
+
+  if(st==='over'){
+    U.innerHTML=`
+      <div class="heroBanner" style="background:linear-gradient(135deg,#ff7657,#ffb84d)">
+        <div class="badge">FIN DE LA EXPEDICIÓN</div>
+        <h1>¡DEFENSA SUPERADA!</h1>
+        <p style="font-weight:800">Los gorilas alcanzaron el campamento en la oleada ${wave}.</p>
+      </div>
+      <div class="statGrid">
+        <div class="statBox"><strong>🌊 ${wave}</strong><span>Oleada</span></div>
+        <div class="statBox"><strong>🏆 ${S.best}</strong><span>Récord</span></div>
+        <div class="statBox"><strong>🍌 ${S.b}</strong><span>Bananas</span></div>
+      </div>
+      <button class="go" onclick="start()">🔄 INTENTAR DE NUEVO</button>
+      <button style="width:100%;margin-top:6px" onclick="st='menu';PAGE='shop';ui()">🛒 Ir a Mejoras y Armería</button>
+      <button style="width:100%;margin-top:6px;background:#fff3c4" onclick="st='menu';PAGE='home';ui()">🏠 Volver al Inicio</button>
+    `;
+    return;
+  }
+
+  let pageBody='';
+  if(PAGE==='home')pageBody=renderHomePage();
+  else if(PAGE==='guide')pageBody=renderGuidePage();
+  else if(PAGE==='news')pageBody=renderNewsPage();
+  else if(PAGE==='shop')pageBody=renderShopContent();
+  else if(PAGE==='legal')pageBody=renderLegalPage();
+  else if(PAGE==='contact')pageBody=renderContactPage();
+
+  U.innerHTML=renderTopNav()+pageBody;
+}
+
+function buyOrEquipAvatar(id){
+  userTouched=true;const it=AVATAR_BY_ID[id];if(!it)return;
+  if(!S.avatar.owned.includes(id)){
+    if(S.b<it.price)return;
+    S.b-=it.price;S.avatar.owned.push(id);
+  }
+  const cat=it.category;
+  if(S.avatar.equip[cat]===id&&!AVATAR_START.includes(id))S.avatar.equip[cat]=null;
+  else S.avatar.equip[cat]=id;
+  sv(true);ui();
+}
+
+function exportSave(){
+  userTouched=true;sv();
+  const payload=JSON.stringify({version:SAVE_VERSION,exportedAt:new Date().toISOString(),data:S},null,2);
+  const blob=new Blob([payload],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download='banana-throw-progreso.json';
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  showToast('Progreso exportado correctamente');
+}
+
+function toggleTheme(){
+  const root=document.documentElement;
+  const cur=root.getAttribute('data-theme');
+  root.setAttribute('data-theme',cur==='dark'?'light':'dark');
+}
+
+document.getElementById('saveFile').addEventListener('change',async e=>{
+  const file=e.target.files&&e.target.files[0];if(!file)return;
+  try{
+    const text=await file.text(),decoded=decodeSave(text);
+    if(!decoded)throw new Error('Archivo inválido');
+    userTouched=true;S=decoded.data;sv();restoreRun();ui();
+    showToast('Progreso restaurado con éxito');
+  }catch(err){showToast('El archivo JSON no es válido');}
+  e.target.value='';
+});
+
+window.addEventListener('beforeunload',()=>sv());
+window.addEventListener('pagehide',()=>sv());
+window.addEventListener('blur',()=>sv());
+document.addEventListener('visibilitychange',()=>{if(document.hidden)sv();});
+setInterval(()=>sv(),1000);
+recoverIndexedDB();ui();
+
+let lt=performance.now();
+function lp(t){
+  DT=Math.min(.05,(t-lt)/1000);lt=t;tm+=DT;
+  if(throwAnimT>0)throwAnimT=Math.max(0,throwAnimT-DT);
+  if(shk>0)shk=Math.max(0,shk-DT*2);
+  for(const f of fx)f.t+=DT*1.3;fx=fx.filter(f=>f.t<1);
+  for(const p of powerFX)p.t+=DT;powerFX=powerFX.filter(p=>p.t<.85);
+  if(st=='play'){
+    up(DT);saveClock+=DT;
+    if(saveClock>=0.8){saveClock=0;sv();}
+  }
+  dr();requestAnimationFrame(lp);
+}
+requestAnimationFrame(lp);
+</script>
+</body>
+</html>
